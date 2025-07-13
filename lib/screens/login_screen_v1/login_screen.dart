@@ -29,7 +29,7 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Util.getColorForHex(Constants.hex_f8f7ff),
       body: _loginScreenBody(),
     );
   }
@@ -41,14 +41,12 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
       children: [
         Container(
           width: Util.getWidthValueInPixels(50),
-          color: Colors.white,
         ),
         Expanded(
           child: _mainBodyWidget(),
         ),
         Container(
           width: Util.getWidthValueInPixels(50),
-          color: Colors.white,
         ),
       ],
     );
@@ -84,6 +82,12 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
               Util.getSpacer(
                   Util.getHeightValueInPixels(40), true), // Empty Spacer
               _loginButton(),
+              Util.getSpacer(
+                  Util.getHeightValueInPixels(20), true), // Empty Spacer
+              _horizontalLineWidget(),
+              Util.getSpacer(
+                  Util.getHeightValueInPixels(20), true), // Empty Spacer
+              _googleLoginWidget(),
             ],
           ),
         ),
@@ -113,7 +117,7 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
       child: Text(
         Strings.login,
         style: GoogleFonts.roboto(
-            color: Util.getColorForHex(Constants.hec_1F41BB),
+            color: Util.getColorForHex(Constants.hex_1F41BB),
             fontSize: Util.getHeightValueInPixels(35),
             fontWeight: FontWeight.w500),
       ),
@@ -144,7 +148,7 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
         children: [
           Text(Strings.email,
               style: GoogleFonts.roboto(
-                  color: Util.getColorForHex(Constants.hec_1F41BB),
+                  color: Util.getColorForHex(Constants.hex_1F41BB),
                   fontSize: Util.getHeightValueInPixels(15),
                   fontWeight: FontWeight.w500)),
           Expanded(
@@ -156,7 +160,7 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
                 borderRadius: BorderRadius.circular(
                   Util.getHeightValueInPixels(17),
                 ),
-                color: Util.getColorForHex(Constants.hec_1F41BB),
+                color: Util.getColorForHex(Constants.hex_1F41BB),
               ),
               child: Container(
                 alignment: Alignment.center,
@@ -199,7 +203,7 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
         children: [
           Text(Strings.password,
               style: GoogleFonts.roboto(
-                  color: Util.getColorForHex(Constants.hec_1F41BB),
+                  color: Util.getColorForHex(Constants.hex_1F41BB),
                   fontSize: Util.getHeightValueInPixels(15),
                   fontWeight: FontWeight.w500)),
           Expanded(
@@ -211,7 +215,7 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
                 borderRadius: BorderRadius.circular(
                   Util.getHeightValueInPixels(17),
                 ),
-                color: Util.getColorForHex(Constants.hec_1F41BB),
+                color: Util.getColorForHex(Constants.hex_1F41BB),
               ),
               child: Container(
                 alignment: Alignment.center,
@@ -251,7 +255,7 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(30),
-        color: Util.getColorForHex(Constants.hec_1F41BB),
+        color: Util.getColorForHex(Constants.hex_1F41BB),
       ),
       child: Text(
         Strings.login,
@@ -259,6 +263,35 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
             color: Colors.white,
             fontSize: Util.getHeightValueInPixels(20),
             fontWeight: FontWeight.w500),
+      ),
+    );
+  }
+
+  Widget _horizontalLineWidget() {
+    return Container(
+      height: Util.getHeightValueInPixels(1),
+      color: Colors.black,
+    );
+  }
+
+  Widget _googleLoginWidget() {
+    double paddingLeftValue = Util.getWidthValueInPixels(10);
+    return Container(
+      alignment: Alignment.centerLeft,
+      height: Util.getHeightValueInPixels(60),
+      padding: EdgeInsets.all(Util.getHeightValueInPixels(1)),
+      decoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(Util.getHeightValueInPixels(17)),
+          color: Colors.black),
+      child: Container(
+        alignment: Alignment.centerLeft,
+        height: Util.getHeightValueInPixels(60),
+        decoration: BoxDecoration(
+            shape: BoxShape.rectangle,
+            borderRadius:
+                BorderRadius.circular(Util.getHeightValueInPixels(16)),
+            color: Colors.white),
       ),
     );
   }
