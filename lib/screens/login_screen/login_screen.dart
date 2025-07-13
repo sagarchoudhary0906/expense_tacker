@@ -81,33 +81,37 @@ class LoginScreen extends StatelessWidget {
               shape: BoxShape.rectangle,
               color: Util.getColorForHex(Constants.hex_52b69a),
               borderRadius: BorderRadius.circular(20)),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Util.getSpacer(10, false),
-              Container(
-                  width: Util.getWidthValueInPixels(32),
-                  height: Util.getHeightValueInPixels(32),
-                  decoration: const BoxDecoration(
-                      shape: BoxShape.circle, color: Colors.white),
-                  child: Padding(
-                    padding: const EdgeInsets.all(3.0),
-                    child: Image.asset(
-                      Constants.fbLogoIcon,
-                    ),
-                  )),
-              Util.getSpacer(10, false),
-              Text(
-                Strings.continueWithFacebook,
-                style: GoogleFonts.roboto(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
+          child: FittedBox(
+            fit: BoxFit.contain,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Util.getSpacer(5, false),
+                Container(
+                    width: Util.getWidthValueInPixels(32),
+                    height: Util.getHeightValueInPixels(32),
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle, color: Colors.white),
+                    child: Padding(
+                      padding: const EdgeInsets.all(3.0),
+                      child: Image.asset(
+                        Constants.fbLogoIcon,
+                      ),
+                    )),
+                Util.getSpacer(5, false),
+                Text(
+                  Strings.continueWithFacebook,
+                  style: GoogleFonts.roboto(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  textScaler: const TextScaler.linear(1.0),
                 ),
-                textScaler: const TextScaler.linear(1.0),
-              ),
-            ],
+                Util.getSpacer(5, false),
+              ],
+            ),
           ),
         ));
   }
@@ -122,33 +126,37 @@ class LoginScreen extends StatelessWidget {
               shape: BoxShape.rectangle,
               color: Util.getColorForHex(Constants.hex_52b69a),
               borderRadius: BorderRadius.circular(20)),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Util.getSpacer(10, false),
-              Container(
-                  width: Util.getWidthValueInPixels(32),
-                  height: Util.getHeightValueInPixels(32),
-                  decoration: const BoxDecoration(
-                      shape: BoxShape.circle, color: Colors.white),
-                  child: Padding(
-                    padding: const EdgeInsets.all(3.0),
-                    child: Image.asset(
-                      Constants.googleLogoIcon,
-                    ),
-                  )),
-              Util.getSpacer(10, false),
-              Text(
-                Strings.continueWithGoogle,
-                style: GoogleFonts.roboto(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
+          child: FittedBox(
+            fit: BoxFit.contain,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Util.getSpacer(5, false),
+                Container(
+                    width: Util.getWidthValueInPixels(32),
+                    height: Util.getHeightValueInPixels(32),
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle, color: Colors.white),
+                    child: Padding(
+                      padding: const EdgeInsets.all(3.0),
+                      child: Image.asset(
+                        Constants.googleLogoIcon,
+                      ),
+                    )),
+                Util.getSpacer(5, false),
+                Text(
+                  Strings.continueWithGoogle,
+                  style: GoogleFonts.roboto(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  textScaler: const TextScaler.linear(1.0),
                 ),
-                textScaler: const TextScaler.linear(1.0),
-              ),
-            ],
+                Util.getSpacer(5, false),
+              ],
+            ),
           ),
         ));
   }
@@ -164,15 +172,25 @@ class LoginScreen extends StatelessWidget {
               shape: BoxShape.rectangle,
               color: Util.getColorForHex(Constants.hex_52b69a),
               borderRadius: BorderRadius.circular(20)),
-          child: Text(
-            Strings.continueAsGuest,
-            style: GoogleFonts.roboto(
-              color: Colors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-            ),
-            textScaler: const TextScaler.linear(1.0),
-          ),
+          child: FittedBox(
+              fit: BoxFit.contain,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Util.getSpacer(5, false),
+                  Text(
+                    Strings.continueAsGuest,
+                    style: GoogleFonts.roboto(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    textScaler: const TextScaler.linear(1.0),
+                  ),
+                  Util.getSpacer(5, false),
+                ],
+              )),
         ));
   }
 }
