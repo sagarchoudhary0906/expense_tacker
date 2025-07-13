@@ -17,10 +17,10 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         backgroundColor: Util.getColorForHex(
-            Constants.HEX_fefae0), // Green background for the AppBar
+            Constants.hex_fefae0), // Green background for the AppBar
         elevation: 0, // Optional: removes AppBar shadow for a flat look
       ),
-      backgroundColor: Util.getColorForHex(Constants.HEX_fefae0),
+      backgroundColor: Util.getColorForHex(Constants.hex_fefae0),
       body: const SizedBox.expand(), // Fills the screen with empty space
     );
   }
