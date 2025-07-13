@@ -14,4 +14,6 @@ class Strings {
       "Login now to track all your expenses\nand income at a place";
   static const String email = "Email";
   static const String enterYouremail = "@ Enter your email";
+  static const String password = "Password";
+  static const String enterYourPass = "Enter your password";
 }

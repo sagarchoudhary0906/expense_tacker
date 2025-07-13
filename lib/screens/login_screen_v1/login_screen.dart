@@ -16,7 +16,9 @@ class LoginScreenV1 extends StatefulWidget {
 
 class _LoginScreenV1State extends State<LoginScreenV1> {
   String email = '';
+  String password = '';
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   void dispose() {
@@ -73,6 +75,8 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
               _loginSubTextWidget(),
               Util.getSpacer(40, true), // Empty Spacer
               _emailContainer(),
+              Util.getSpacer(40, true), // Empty Spacer
+              _passwordConatiner(),
             ],
           ),
         ),
@@ -161,6 +165,57 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
                   onChanged: (value) {
                     setState(() {
                       email = value;
+                    });
+                  },
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _passwordConatiner() {
+    double paddingLeftValue = Util.getWidthValueInPixels(10);
+    return Container(
+      alignment: Alignment.centerLeft,
+      height: Util.getHeightValueInPixels(80),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(Strings.password,
+              style: GoogleFonts.roboto(
+                  color: Util.getColorForHex(Constants.hec_1F41BB),
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500)),
+          Expanded(
+            flex: 1,
+            child: Container(
+              padding: const EdgeInsets.all(1),
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(17),
+                color: Util.getColorForHex(Constants.hec_1F41BB),
+              ),
+              child: Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(16),
+                  color: Colors.white,
+                ),
+                child: TextField(
+                  controller: _passwordController,
+                  decoration: InputDecoration(
+                    hintText: Strings.enterYourPass,
+                    border: InputBorder.none,
+                    isCollapsed: true, // This removes extra vertical padding
+                    contentPadding: EdgeInsets.only(left: paddingLeftValue),
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      password = value;
                     });
                   },
                 ),
