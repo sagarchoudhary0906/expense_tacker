@@ -6,4 +6,6 @@ class Strings {
   static const String facebook = "Facebook";
   static const String google = "Google";
   static const String continueAsGuest = "Continue As Guest";
+  static const String continueWithFacebook = "Continue with Facebook";
+  static const String continueWithGoogle = "Continue with Google";
 }

@@ -73,77 +73,91 @@ class LoginScreen extends StatelessWidget {
 
   Widget _signUpFbOptionsWidget() {
     return Transform.translate(
-      offset: Offset(
-          Util.getWidthValueInPixels(-60), Util.getHeightValueInPixels(120)),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: Util.getWidthValueInPixels(60),
-            height: Util.getHeightValueInPixels(60),
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image.asset(Constants.fbLogoIcon),
-            ),
+        offset: Offset(0, Util.getHeightValueInPixels(120)),
+        child: Container(
+          height: Util.getHeightValueInPixels(40),
+          width: Util.getHeightValueInPixels(250),
+          decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              color: Util.getColorForHex(Constants.hex_52b69a),
+              borderRadius: BorderRadius.circular(20)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Util.getSpacer(10, false),
+              Container(
+                  width: Util.getWidthValueInPixels(32),
+                  height: Util.getHeightValueInPixels(32),
+                  decoration: const BoxDecoration(
+                      shape: BoxShape.circle, color: Colors.white),
+                  child: Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: Image.asset(
+                      Constants.fbLogoIcon,
+                    ),
+                  )),
+              Util.getSpacer(10, false),
+              Text(
+                Strings.continueWithFacebook,
+                style: GoogleFonts.roboto(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
+                textScaler: const TextScaler.linear(1.0),
+              ),
+            ],
           ),
-          Util.getSpacer(8, true),
-          Text(
-            Strings.facebook,
-            style: GoogleFonts.roboto(
-              fontSize: 14,
-              color: Colors.white,
-              fontWeight: FontWeight.w400,
-            ),
-            textScaler: const TextScaler.linear(1.0),
-          ),
-        ],
-      ),
-    );
+        ));
   }
 
   Widget _signUpGoogleOptionsWidget() {
     return Transform.translate(
-      offset: Offset(
-          Util.getWidthValueInPixels(60), Util.getHeightValueInPixels(120)),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: Util.getWidthValueInPixels(60),
-            height: Util.getHeightValueInPixels(60),
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image.asset(Constants.googleLogoIcon),
-            ),
+        offset: Offset(0, Util.getHeightValueInPixels(180)),
+        child: Container(
+          height: Util.getHeightValueInPixels(40),
+          width: Util.getHeightValueInPixels(230),
+          decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              color: Util.getColorForHex(Constants.hex_52b69a),
+              borderRadius: BorderRadius.circular(20)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Util.getSpacer(10, false),
+              Container(
+                  width: Util.getWidthValueInPixels(32),
+                  height: Util.getHeightValueInPixels(32),
+                  decoration: const BoxDecoration(
+                      shape: BoxShape.circle, color: Colors.white),
+                  child: Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: Image.asset(
+                      Constants.googleLogoIcon,
+                    ),
+                  )),
+              Util.getSpacer(10, false),
+              Text(
+                Strings.continueWithGoogle,
+                style: GoogleFonts.roboto(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
+                textScaler: const TextScaler.linear(1.0),
+              ),
+            ],
           ),
-          Util.getSpacer(8, true),
-          Text(
-            Strings.google,
-            style: GoogleFonts.roboto(
-              fontSize: 14,
-              color: Colors.white,
-              fontWeight: FontWeight.w400,
-            ),
-            textScaler: const TextScaler.linear(1.0),
-          ),
-        ],
-      ),
-    );
+        ));
   }
 
   Widget _continueAsGuestWidget() {
     return Transform.translate(
-        offset: Offset(0, Util.getHeightValueInPixels(260)),
+        offset: Offset(0, Util.getHeightValueInPixels(235)),
         child: Container(
-          height: Util.getHeightValueInPixels(40),
+          height: Util.getHeightValueInPixels(35),
           width: Util.getHeightValueInPixels(200),
           alignment: Alignment.center,
           decoration: BoxDecoration(
