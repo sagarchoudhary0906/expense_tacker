@@ -72,10 +72,12 @@ class LoginScreen extends StatelessWidget {
 
   Widget _signUpFbOptionsWidget() {
     return Transform.translate(
-        offset: Offset(
-            Util.getWidthValueInPixels(-60), Util.getHeightValueInPixels(120)),
-        child: Center(
-          child: Container(
+      offset: Offset(
+          Util.getWidthValueInPixels(-60), Util.getHeightValueInPixels(120)),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
             width: Util.getWidthValueInPixels(60),
             height: Util.getHeightValueInPixels(60),
             decoration: const BoxDecoration(
@@ -87,15 +89,28 @@ class LoginScreen extends StatelessWidget {
               child: Image.asset(Constants.fbLogoIcon),
             ),
           ),
-        ));
+          Util.getSpacer(8, true),
+          Text(
+            Strings.facebook,
+            style: GoogleFonts.roboto(
+              fontSize: 14,
+              color: Colors.white,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _signUpGoogleOptionsWidget() {
     return Transform.translate(
-        offset: Offset(
-            Util.getWidthValueInPixels(60), Util.getHeightValueInPixels(120)),
-        child: Center(
-          child: Container(
+      offset: Offset(
+          Util.getWidthValueInPixels(60), Util.getHeightValueInPixels(120)),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
             width: Util.getWidthValueInPixels(60),
             height: Util.getHeightValueInPixels(60),
             decoration: const BoxDecoration(
@@ -107,6 +122,17 @@ class LoginScreen extends StatelessWidget {
               child: Image.asset(Constants.googleLogoIcon),
             ),
           ),
-        ));
+          Util.getSpacer(8, true),
+          Text(
+            Strings.google,
+            style: GoogleFonts.roboto(
+              fontSize: 14,
+              color: Colors.white,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

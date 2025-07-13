@@ -3,4 +3,6 @@ class Strings {
   static const String loginOrSignUp = "Login or Sign Up";
   static const String signUpBelowToCreateAsecureAccount =
       "Sign up below to create a\nsecure account";
+  static const String facebook = "Facebook";
+  static const String google = "Google";
 }
