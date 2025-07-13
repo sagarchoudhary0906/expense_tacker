@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../utiility/constants.dart';
+import '../../utiility/strings.dart';
 import '../../utiility/util.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -19,6 +21,7 @@ class LoginScreen extends StatelessWidget {
       children: [
         _backgroundWidget(),
         _loginScreenWalletIconWidget(),
+        _signUpOrSignIntextWidget(),
       ],
     );
   }
@@ -30,9 +33,8 @@ class LoginScreen extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Util.getColorForHex(
-                Constants.hex_52b69a), // Replace with your top green
-            Colors.black, // Replace with your bottom green
+            Util.getColorForHex(Constants.hex_52b69a),
+            Colors.black,
           ],
         ),
       ),
@@ -41,8 +43,7 @@ class LoginScreen extends StatelessWidget {
 
   Widget _loginScreenWalletIconWidget() {
     return Transform.translate(
-      offset: Offset(
-          0, Util.getHeightValueInPixels(-200)), // Move up by 60 design pixels
+      offset: Offset(0, Util.getHeightValueInPixels(-200)),
       child: Container(
         height: Util.getHeightValueInPixels(125),
         width: Util.getWidthValueInPixels(125),
@@ -55,6 +56,15 @@ class LoginScreen extends StatelessWidget {
           child: Image.asset(Constants.loginScreenWalletIcon),
         ),
       ),
+    );
+  }
+
+  Widget _signUpOrSignIntextWidget() {
+    return Text(
+      Strings.signUpBelowToCreateAsecureAccount,
+      style: GoogleFonts.roboto(
+          fontSize: 23, fontWeight: FontWeight.w500, color: Colors.white),
+      textAlign: TextAlign.center,
     );
   }
 }

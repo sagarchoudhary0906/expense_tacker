@@ -3,6 +3,7 @@ import 'screens/login_screen/login_screen.dart';
 import 'utiility/device_info.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
