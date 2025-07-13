@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/login_screen/login_screen.dart';
+import 'screens/login_screen_v1/login_screen.dart';
 import 'utiility/device_info.dart';
 
 void main() {
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
 
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: LoginScreenV1(),
     );
   }
 }

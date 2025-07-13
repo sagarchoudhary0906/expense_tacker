@@ -2,8 +2,8 @@ import 'package:expense_tracker/utiility/device_info.dart';
 import 'package:flutter/material.dart';
 
 class Util {
-  static const double _referenceScreenHeight = 800.0;
-  static const double _referenceScreenWidth = 400.0;
+  static const double _referenceScreenHeight = 926.0;
+  static const double _referenceScreenWidth = 428.0;
 
   static Color getColorForHex(String hexColor) {
     hexColor = hexColor.replaceAll('#', '');
@@ -40,6 +40,10 @@ class Util {
 
   static double getFullScreenHeight() {
     return DeviceInfo.instance.screenHeight;
+  }
+
+  static double getFullScreenWidth() {
+    return DeviceInfo.instance.screenWidth;
   }
 
   /// Converts fixed pixel values to responsive positions based on screen size

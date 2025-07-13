@@ -8,4 +8,10 @@ class Strings {
   static const String continueAsGuest = "Continue As Guest";
   static const String continueWithFacebook = "Continue with Facebook";
   static const String continueWithGoogle = "Continue with Google";
+  static const String loginHere = "Login here";
+  static const String login = "Login";
+  static const String loginNowToTrackAllYourExpenses =
+      "Login now to track all your expenses\nand income at a place";
+  static const String email = "Email";
+  static const String enterYouremail = "@ Enter your email";
 }
