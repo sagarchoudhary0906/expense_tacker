@@ -1,6 +1,8 @@
 class Constants {
   static const String appName = 'Expense Tracker';
   static const String loginScreenWalletIcon = 'assets/images/wallet.png';
+  static const String fbLogoIcon = 'assets/images/facebook_logo.png';
+  static const String googleLogoIcon = 'assets/images/google_logo.png';
 
   // Hex Colors
   static const String hex_fefae0 = "fefae0";

@@ -22,6 +22,8 @@ class LoginScreen extends StatelessWidget {
         _backgroundWidget(),
         _loginScreenWalletIconWidget(),
         _signUpOrSignIntextWidget(),
+        _signUpFbOptionsWidget(),
+        _signUpGoogleOptionsWidget(),
       ],
     );
   }
@@ -63,8 +65,48 @@ class LoginScreen extends StatelessWidget {
     return Text(
       Strings.signUpBelowToCreateAsecureAccount,
       style: GoogleFonts.roboto(
-          fontSize: 23, fontWeight: FontWeight.w500, color: Colors.white),
+          fontSize: 24, fontWeight: FontWeight.w500, color: Colors.white),
       textAlign: TextAlign.center,
     );
+  }
+
+  Widget _signUpFbOptionsWidget() {
+    return Transform.translate(
+        offset: Offset(
+            Util.getWidthValueInPixels(-60), Util.getHeightValueInPixels(120)),
+        child: Center(
+          child: Container(
+            width: Util.getWidthValueInPixels(60),
+            height: Util.getHeightValueInPixels(60),
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset(Constants.fbLogoIcon),
+            ),
+          ),
+        ));
+  }
+
+  Widget _signUpGoogleOptionsWidget() {
+    return Transform.translate(
+        offset: Offset(
+            Util.getWidthValueInPixels(60), Util.getHeightValueInPixels(120)),
+        child: Center(
+          child: Container(
+            width: Util.getWidthValueInPixels(60),
+            height: Util.getHeightValueInPixels(60),
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset(Constants.googleLogoIcon),
+            ),
+          ),
+        ));
   }
 }
