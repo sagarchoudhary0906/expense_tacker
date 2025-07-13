@@ -48,7 +48,7 @@ class Util {
   /// [fixedPixels] - The fixed pixel value you want to convert (e.g., 300)
   ///
   /// Returns a responsive position value that maintains visual consistency
-  static double getResponsivePosition(double fixedPixels) {
+  static double getHeightValueInPixels(double fixedPixels) {
     // Get screen dimensions
     final double screenHeight = DeviceInfo.instance.screenHeight;
     // Use a reference screen height (e.g., iPhone 14 Pro height: 844)
@@ -60,7 +60,7 @@ class Util {
   }
 
   /// Alternative method using screen width for horizontal positioning
-  static double getResponsiveHorizontalPosition(double fixedPixels) {
+  static double getWidthValueInPixels(double fixedPixels) {
     final double screenWidth = DeviceInfo.instance.screenWidth;
 
     return (fixedPixels / _referenceScreenWidth) * screenWidth;
