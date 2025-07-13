@@ -68,15 +68,22 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Util.getSpacer(10, true), // Empty Spacer
+              Util.getSpacer(
+                  Util.getHeightValueInPixels(10), true), // Empty Spacer
               _backIconWidget(),
-              Util.getSpacer(20, true), // Empty Spacer
+              Util.getSpacer(
+                  Util.getHeightValueInPixels(20), true), // Empty Spacer
               _loginTextWidget(),
               _loginSubTextWidget(),
-              Util.getSpacer(40, true), // Empty Spacer
+              Util.getSpacer(
+                  Util.getHeightValueInPixels(40), true), // Empty Spacer
               _emailContainer(),
-              Util.getSpacer(40, true), // Empty Spacer
+              Util.getSpacer(
+                  Util.getHeightValueInPixels(40), true), // Empty Spacer
               _passwordConatiner(),
+              Util.getSpacer(
+                  Util.getHeightValueInPixels(40), true), // Empty Spacer
+              _loginButton(),
             ],
           ),
         ),
@@ -107,7 +114,7 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
         Strings.login,
         style: GoogleFonts.roboto(
             color: Util.getColorForHex(Constants.hec_1F41BB),
-            fontSize: 35,
+            fontSize: Util.getHeightValueInPixels(35),
             fontWeight: FontWeight.w500),
       ),
     );
@@ -120,7 +127,9 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
           child: Text(
         Strings.loginNowToTrackAllYourExpenses,
         style: GoogleFonts.roboto(
-            color: Colors.black, fontSize: 15, fontWeight: FontWeight.w500),
+            color: Colors.black,
+            fontSize: Util.getHeightValueInPixels(15),
+            fontWeight: FontWeight.w500),
       )),
     );
   }
@@ -136,7 +145,7 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
           Text(Strings.email,
               style: GoogleFonts.roboto(
                   color: Util.getColorForHex(Constants.hec_1F41BB),
-                  fontSize: 15,
+                  fontSize: Util.getHeightValueInPixels(15),
                   fontWeight: FontWeight.w500)),
           Expanded(
             flex: 1,
@@ -144,14 +153,18 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
               padding: const EdgeInsets.all(1),
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(17),
+                borderRadius: BorderRadius.circular(
+                  Util.getHeightValueInPixels(17),
+                ),
                 color: Util.getColorForHex(Constants.hec_1F41BB),
               ),
               child: Container(
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(
+                    Util.getHeightValueInPixels(16),
+                  ),
                   color: Colors.white,
                 ),
                 child: TextField(
@@ -187,7 +200,7 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
           Text(Strings.password,
               style: GoogleFonts.roboto(
                   color: Util.getColorForHex(Constants.hec_1F41BB),
-                  fontSize: 15,
+                  fontSize: Util.getHeightValueInPixels(15),
                   fontWeight: FontWeight.w500)),
           Expanded(
             flex: 1,
@@ -195,14 +208,18 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
               padding: const EdgeInsets.all(1),
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(17),
+                borderRadius: BorderRadius.circular(
+                  Util.getHeightValueInPixels(17),
+                ),
                 color: Util.getColorForHex(Constants.hec_1F41BB),
               ),
               child: Container(
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(
+                    Util.getHeightValueInPixels(16),
+                  ),
                   color: Colors.white,
                 ),
                 child: TextField(
@@ -223,6 +240,25 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _loginButton() {
+    return Container(
+      alignment: Alignment.center,
+      height: Util.getHeightValueInPixels(60),
+      decoration: BoxDecoration(
+        shape: BoxShape.rectangle,
+        borderRadius: BorderRadius.circular(30),
+        color: Util.getColorForHex(Constants.hec_1F41BB),
+      ),
+      child: Text(
+        Strings.login,
+        style: GoogleFonts.roboto(
+            color: Colors.white,
+            fontSize: Util.getHeightValueInPixels(20),
+            fontWeight: FontWeight.w500),
       ),
     );
   }
