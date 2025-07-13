@@ -24,6 +24,7 @@ class LoginScreen extends StatelessWidget {
         _signUpOrSignIntextWidget(),
         _signUpFbOptionsWidget(),
         _signUpGoogleOptionsWidget(),
+        _continueAsGuestWidget(),
       ],
     );
   }
@@ -97,6 +98,7 @@ class LoginScreen extends StatelessWidget {
               color: Colors.white,
               fontWeight: FontWeight.w400,
             ),
+            textScaler: const TextScaler.linear(1.0),
           ),
         ],
       ),
@@ -130,9 +132,33 @@ class LoginScreen extends StatelessWidget {
               color: Colors.white,
               fontWeight: FontWeight.w400,
             ),
+            textScaler: const TextScaler.linear(1.0),
           ),
         ],
       ),
     );
+  }
+
+  Widget _continueAsGuestWidget() {
+    return Transform.translate(
+        offset: Offset(0, Util.getHeightValueInPixels(260)),
+        child: Container(
+          height: Util.getHeightValueInPixels(40),
+          width: Util.getHeightValueInPixels(200),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              color: Util.getColorForHex(Constants.hex_52b69a),
+              borderRadius: BorderRadius.circular(20)),
+          child: Text(
+            Strings.continueAsGuest,
+            style: GoogleFonts.roboto(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
+            textScaler: const TextScaler.linear(1.0),
+          ),
+        ));
   }
 }

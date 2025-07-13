@@ -5,4 +5,5 @@ class Strings {
       "Sign up below to create a\nsecure account";
   static const String facebook = "Facebook";
   static const String google = "Google";
+  static const String continueAsGuest = "Continue As Guest";
 }
