@@ -88,6 +88,9 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
               Util.getSpacer(
                   Util.getHeightValueInPixels(20), true), // Empty Spacer
               _googleLoginWidget(),
+              Util.getSpacer(
+                  Util.getHeightValueInPixels(40), true), // Empty Spacer
+              _registerWidget(),
             ],
           ),
         ),
@@ -310,6 +313,32 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _registerWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(),
+        Text(
+          Strings.dontHaveAnAccount,
+          style: GoogleFonts.roboto(
+              color: Colors.black, fontSize: 15, fontWeight: FontWeight.w500),
+        ),
+        Util.getSpacer(Util.getWidthValueInPixels(5), false),
+        Text(
+          Strings.register,
+          style: GoogleFonts.roboto(
+            color: Util.getColorForHex(Constants.hex_1F41BB),
+            fontSize: 15,
+            fontWeight: FontWeight.w500,
+            decoration: TextDecoration.underline,
+            decorationColor: Util.getColorForHex(Constants.hex_1F41BB),
+          ),
+        ),
+      ],
     );
   }
 }
