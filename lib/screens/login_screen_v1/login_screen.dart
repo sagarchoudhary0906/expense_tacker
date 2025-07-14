@@ -275,9 +275,8 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
   }
 
   Widget _googleLoginWidget() {
-    double paddingLeftValue = Util.getWidthValueInPixels(10);
     return Container(
-      alignment: Alignment.centerLeft,
+      alignment: Alignment.center,
       height: Util.getHeightValueInPixels(60),
       padding: EdgeInsets.all(Util.getHeightValueInPixels(1)),
       decoration: BoxDecoration(
@@ -285,13 +284,31 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
           borderRadius: BorderRadius.circular(Util.getHeightValueInPixels(17)),
           color: Colors.black),
       child: Container(
-        alignment: Alignment.centerLeft,
+        alignment: Alignment.center,
         height: Util.getHeightValueInPixels(60),
         decoration: BoxDecoration(
             shape: BoxShape.rectangle,
             borderRadius:
                 BorderRadius.circular(Util.getHeightValueInPixels(16)),
             color: Colors.white),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(14),
+              child: Image.asset(Constants.googleLogoIcon),
+            ),
+            Text(
+              Strings.continueWithGoogle,
+              style: GoogleFonts.roboto(
+                color: Colors.black,
+                fontSize: Util.getHeightValueInPixels(20),
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
