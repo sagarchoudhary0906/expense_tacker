@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'screens/login_screen_v1/login_screen.dart';
-import 'screens/login_screen_v1/register_screen.dart';
 import 'utiility/device_info.dart';
 
 void main() {
