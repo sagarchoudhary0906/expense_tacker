@@ -7,6 +7,11 @@ import '../../utiility/util.dart';
 import '../commonWidgets/common_widgets.dart';
 import 'login_screen.dart';
 
+/// RegisterScreen provides a registration form for new users.
+/// Features:
+/// - Email, password, and name input fields
+/// - Custom styling and responsive layout
+/// - Navigation to login screen for existing users
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
@@ -15,6 +20,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  // Controllers for form fields
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
@@ -33,6 +39,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _initializeStyles();
   }
 
+  /// Initializes color and text styles for the screen.
   void _initializeStyles() {
     _brandColor = Util.getColorForHex(Constants.hex_1F41BB);
     _backgroundColor = Util.getColorForHex(Constants.hex_f8f7ff);
@@ -64,6 +71,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   void dispose() {
+    // Dispose controllers to free resources
     _emailController.dispose();
     _passwordController.dispose();
     _nameController.dispose();
@@ -76,42 +84,45 @@ class _RegisterScreenState extends State<RegisterScreen> {
       backgroundColor: Util.getColorForHex(Constants.hex_f8f7ff),
       body: SafeArea(
         child: Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: Util.getWidthValueInPixels(50)),
+          padding: EdgeInsets.symmetric(
+            horizontal: Util.getWidthValueInPixels(50),
+          ),
           child: _mainContent(),
         ),
       ),
     );
   }
 
+  /// Main content of the registration screen, arranged vertically.
   Widget _mainContent() {
     return Column(
       children: [
-        // Bezel Top Safe Area Widget
+        // Top safe area spacing
         SizedBox(height: Util.getHeightValueInPixels(10)),
         CommonWidgets.backButtonWidget(),
         SizedBox(height: Util.getHeightValueInPixels(20)),
-        _registerTextWidget(),
-        _registerSubTextWidget(),
+        _registerTextWidget(), // "Register" title
+        _registerSubTextWidget(), // Subtitle with bold app name
         SizedBox(height: Util.getHeightValueInPixels(40)),
         CommonWidgets.emailContainer(
-            _emailController, _labelStyle, _brandColor),
+            _emailController, _labelStyle, _brandColor), // Email input
         SizedBox(height: Util.getHeightValueInPixels(30)),
         CommonWidgets.passwordContainer(
-            _passwordController, _labelStyle, _brandColor),
+            _passwordController, _labelStyle, _brandColor), // Password input
         SizedBox(height: Util.getHeightValueInPixels(30)),
         CommonWidgets.addYourNameContainer(
-            _nameController, _labelStyle, _brandColor),
+            _nameController, _labelStyle, _brandColor), // Name input
         SizedBox(height: Util.getHeightValueInPixels(50)),
-        _registerButton(),
+        _registerButton(), // Register button
         SizedBox(height: Util.getHeightValueInPixels(20)),
-        CommonWidgets.horizontalLineWidget(),
+        CommonWidgets.horizontalLineWidget(), // Divider
         SizedBox(height: Util.getHeightValueInPixels(20)),
-        _alreadyHaveAccountLoginWidget()
+        _alreadyHaveAccountLoginWidget() // Link to login screen
       ],
     );
   }
 
+  /// "Register" title widget
   Widget _registerTextWidget() {
     return Align(
       alignment: Alignment.centerLeft,
@@ -119,6 +130,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
+  /// Subtitle widget with bold "ExpenseTracker" text
   Widget _registerSubTextWidget() {
     return Align(
       alignment: Alignment.centerLeft,
@@ -139,6 +151,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
+  /// Register button widget
   Widget _registerButton() {
     return GestureDetector(
       onTap: _handleRegister,
@@ -155,6 +168,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
+  /// Widget for "Already have an account? Login" with clickable login link
   Widget _alreadyHaveAccountLoginWidget() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -175,14 +189,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
+  /// Handles registration logic (to be implemented)
   void _handleRegister() {
-    // TODO: Implement login logic
+    // TODO: Implement registration logic
     final email = _emailController.text;
     final password = _passwordController.text;
     final name = _nameController.text;
     print('Register attempt: $email  $password $name');
   }
 
+  /// Navigates to the login screen and closes the register screen
   void _handleLogin() {
     Navigator.pushReplacement(
       context,
