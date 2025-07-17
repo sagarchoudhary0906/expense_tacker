@@ -328,16 +328,19 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
               color: Colors.black, fontSize: 15, fontWeight: FontWeight.w500),
         ),
         Util.getSpacer(Util.getWidthValueInPixels(5), false),
-        Text(
-          Strings.register,
-          style: GoogleFonts.roboto(
-            color: Util.getColorForHex(Constants.hex_1F41BB),
-            fontSize: 15,
-            fontWeight: FontWeight.w500,
-            decoration: TextDecoration.underline,
-            decorationColor: Util.getColorForHex(Constants.hex_1F41BB),
+        GestureDetector(
+          onTap: () {},
+          child: Text(
+            Strings.register,
+            style: GoogleFonts.roboto(
+              color: Util.getColorForHex(Constants.hex_1F41BB),
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+              decoration: TextDecoration.underline,
+              decorationColor: Util.getColorForHex(Constants.hex_1F41BB),
+            ),
           ),
-        ),
+        )
       ],
     );
   }
