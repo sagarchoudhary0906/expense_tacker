@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../utiility/constants.dart';
 import '../../utiility/strings.dart';
 import '../../utiility/util.dart';
+import '../commonWidgets/common_widgets.dart';
 
 /// Login Screen Version 1 - A modern login interface with email/password and Google OAuth
 /// Features:
@@ -92,7 +93,7 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
     return Column(
       children: [
         SizedBox(height: Util.getHeightValueInPixels(10)),
-        _backIconWidget(),
+        CommonWidgets.backButtonWidget(),
         SizedBox(height: Util.getHeightValueInPixels(20)),
         _loginTextWidget(),
         _loginSubTextWidget(),
@@ -109,18 +110,6 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
         SizedBox(height: Util.getHeightValueInPixels(40)),
         _registerWidget(),
       ],
-    );
-  }
-
-  /// Back navigation icon widget
-  Widget _backIconWidget() {
-    return const Align(
-      alignment: Alignment.centerLeft,
-      child: Icon(
-        Icons.arrow_back,
-        color: Colors.black,
-        size: 30,
-      ),
     );
   }
 
