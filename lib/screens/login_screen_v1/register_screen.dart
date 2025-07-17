@@ -81,7 +81,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Util.getColorForHex(Constants.hex_f8f7ff),
+      backgroundColor: _backgroundColor,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(
