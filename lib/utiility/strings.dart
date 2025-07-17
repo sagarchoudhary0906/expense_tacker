@@ -18,4 +18,10 @@ class Strings {
   static const String enterYourPass = "🔐 Enter your password";
   static const String dontHaveAnAccount = "Don't have an account?";
   static const String register = "Register";
+  static const String createAnAccountToAccessAllTheFeaturesOf =
+      "Create an account to access all the\nfeatures of ";
+  static const String expenseTracker = "ExpenseTracker";
+  static const String yourName = "Your Name";
+  static const String enterYourName = "Enter Your Name";
+  static const String alreadyHaveAnAccount = "Already have an account?";
 }
