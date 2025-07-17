@@ -15,7 +15,7 @@ class Strings {
   static const String email = "Email";
   static const String enterYouremail = "@ Enter your email";
   static const String password = "Password";
-  static const String enterYourPass = "Enter your password";
+  static const String enterYourPass = "🔐 Enter your password";
   static const String dontHaveAnAccount = "Don't have an account?";
   static const String register = "Register";
 }
