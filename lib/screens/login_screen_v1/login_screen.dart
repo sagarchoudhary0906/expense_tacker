@@ -5,300 +5,241 @@ import '../../utiility/constants.dart';
 import '../../utiility/strings.dart';
 import '../../utiility/util.dart';
 
+/// Login Screen Version 1 - A modern login interface with email/password and Google OAuth
+/// Features:
+/// - Email and password input fields with custom styling
+/// - Google OAuth login option
+/// - Registration link for new users
+/// - Responsive design with safe area handling
 class LoginScreenV1 extends StatefulWidget {
   const LoginScreenV1({super.key});
 
   @override
-  State<StatefulWidget> createState() {
-    return _LoginScreenV1State();
-  }
+  State<StatefulWidget> createState() => _LoginScreenV1State();
 }
 
 class _LoginScreenV1State extends State<LoginScreenV1> {
-  String email = '';
-  String password = '';
+  // Text editing controllers for form validation and state management
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  // Cached colors and styles for better performance
+  late final Color _brandColor;
+  late final Color _backgroundColor;
+  late final TextStyle _titleStyle;
+  late final TextStyle _labelStyle;
+  late final TextStyle _bodyStyle;
+  late final TextStyle _buttonTextStyle;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeStyles();
+  }
+
+  void _initializeStyles() {
+    _brandColor = Util.getColorForHex(Constants.hex_1F41BB);
+    _backgroundColor = Util.getColorForHex(Constants.hex_f8f7ff);
+
+    _titleStyle = GoogleFonts.roboto(
+      color: _brandColor,
+      fontSize: Util.getHeightValueInPixels(35),
+      fontWeight: FontWeight.w500,
+    );
+
+    _labelStyle = GoogleFonts.roboto(
+      color: _brandColor,
+      fontSize: Util.getHeightValueInPixels(15),
+      fontWeight: FontWeight.w500,
+    );
+
+    _bodyStyle = GoogleFonts.roboto(
+      color: Colors.black,
+      fontSize: Util.getHeightValueInPixels(15),
+      fontWeight: FontWeight.w500,
+    );
+
+    _buttonTextStyle = GoogleFonts.roboto(
+      color: Colors.white,
+      fontSize: Util.getHeightValueInPixels(20),
+      fontWeight: FontWeight.w500,
+    );
+  }
 
   @override
   void dispose() {
     _emailController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Util.getColorForHex(Constants.hex_f8f7ff),
-      body: _loginScreenBody(),
+      backgroundColor: _backgroundColor,
+      body: SafeArea(
+        child: Padding(
+          padding:
+              EdgeInsets.symmetric(horizontal: Util.getWidthValueInPixels(50)),
+          child: _mainContent(),
+        ),
+      ),
     );
   }
 
-  Widget _loginScreenBody() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Container(
-          width: Util.getWidthValueInPixels(50),
-        ),
-        Expanded(
-          child: _mainBodyWidget(),
-        ),
-        Container(
-          width: Util.getWidthValueInPixels(50),
-        ),
-      ],
-    );
-  }
-
-  Widget _mainBodyWidget() {
+  /// Main content with vertical layout
+  Widget _mainContent() {
     return Column(
-      // mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        // Bezel Top Safe Area Widget
+        SizedBox(height: Util.getHeightValueInPixels(10)),
+        _backIconWidget(),
+        SizedBox(height: Util.getHeightValueInPixels(20)),
+        _loginTextWidget(),
+        _loginSubTextWidget(),
+        SizedBox(height: Util.getHeightValueInPixels(40)),
+        _emailContainer(),
+        SizedBox(height: Util.getHeightValueInPixels(40)),
+        _passwordContainer(),
+        SizedBox(height: Util.getHeightValueInPixels(40)),
+        _loginButton(),
+        SizedBox(height: Util.getHeightValueInPixels(20)),
+        _horizontalLineWidget(),
+        SizedBox(height: Util.getHeightValueInPixels(20)),
+        _googleLoginWidget(),
+        SizedBox(height: Util.getHeightValueInPixels(40)),
+        _registerWidget(),
+      ],
+    );
+  }
+
+  /// Back navigation icon widget
+  Widget _backIconWidget() {
+    return const Align(
+      alignment: Alignment.centerLeft,
+      child: Icon(
+        Icons.arrow_back,
+        color: Colors.black,
+        size: 30,
+      ),
+    );
+  }
+
+  /// Main "Login" title widget
+  Widget _loginTextWidget() {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Text(Strings.login, style: _titleStyle),
+    );
+  }
+
+  /// Subtitle text explaining the purpose of login
+  Widget _loginSubTextWidget() {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Text(
+        Strings.loginNowToTrackAllYourExpenses,
+        style: _bodyStyle,
+      ),
+    );
+  }
+
+  /// Reusable input field widget
+  Widget _buildInputField({
+    required String label,
+    required String hintText,
+    required TextEditingController controller,
+    bool isPassword = false,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label, style: _labelStyle),
+        SizedBox(height: Util.getHeightValueInPixels(8)),
         Container(
-          height: Util.getTopSafeAreaHeight(),
-          color: Colors.white,
-        ),
-        Expanded(
-          // <-- This makes the green container fill the remaining space
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Util.getSpacer(
-                  Util.getHeightValueInPixels(10), true), // Empty Spacer
-              _backIconWidget(),
-              Util.getSpacer(
-                  Util.getHeightValueInPixels(20), true), // Empty Spacer
-              _loginTextWidget(),
-              _loginSubTextWidget(),
-              Util.getSpacer(
-                  Util.getHeightValueInPixels(40), true), // Empty Spacer
-              _emailContainer(),
-              Util.getSpacer(
-                  Util.getHeightValueInPixels(40), true), // Empty Spacer
-              _passwordConatiner(),
-              Util.getSpacer(
-                  Util.getHeightValueInPixels(40), true), // Empty Spacer
-              _loginButton(),
-              Util.getSpacer(
-                  Util.getHeightValueInPixels(20), true), // Empty Spacer
-              _horizontalLineWidget(),
-              Util.getSpacer(
-                  Util.getHeightValueInPixels(20), true), // Empty Spacer
-              _googleLoginWidget(),
-              Util.getSpacer(
-                  Util.getHeightValueInPixels(40), true), // Empty Spacer
-              _registerWidget(),
-            ],
+          height: Util.getHeightValueInPixels(50),
+          decoration: BoxDecoration(
+            borderRadius:
+                BorderRadius.circular(Util.getHeightValueInPixels(17)),
+            border: Border.all(color: _brandColor, width: 1),
           ),
-        ),
-        // Bezel Bottom Safe Area Widget
-        Container(
-          height: Util.getBottomSafeAreaHeight(),
-          color: Colors.white,
+          child: TextField(
+            controller: controller,
+            obscureText: isPassword,
+            decoration: InputDecoration(
+              hintText: hintText,
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.symmetric(
+                horizontal:
+                    Util.getWidthValueInPixels(15), // Left and right padding
+                vertical: Util.getHeightValueInPixels(
+                    12), // Top and bottom padding for vertical centering
+              ),
+            ),
+          ),
         ),
       ],
     );
   }
 
-  Widget _backIconWidget() {
-    return Container(
-      alignment: Alignment.centerLeft,
-      child: const Icon(
-        Icons.arrow_back, // Default back arrow icon
-        color: Colors.black, // You can change the color if needed
-        size: 30, // You can change the size if needed
-      ),
-    );
-  }
-
-  Widget _loginTextWidget() {
-    return Container(
-      alignment: Alignment.centerLeft,
-      child: Text(
-        Strings.login,
-        style: GoogleFonts.roboto(
-            color: Util.getColorForHex(Constants.hex_1F41BB),
-            fontSize: Util.getHeightValueInPixels(35),
-            fontWeight: FontWeight.w500),
-      ),
-    );
-  }
-
-  Widget _loginSubTextWidget() {
-    return Container(
-      alignment: Alignment.centerLeft,
-      child: FittedBox(
-          child: Text(
-        Strings.loginNowToTrackAllYourExpenses,
-        style: GoogleFonts.roboto(
-            color: Colors.black,
-            fontSize: Util.getHeightValueInPixels(15),
-            fontWeight: FontWeight.w500),
-      )),
-    );
-  }
-
+  /// Email input field container
   Widget _emailContainer() {
-    double paddingLeftValue = Util.getWidthValueInPixels(10);
-    return Container(
-      alignment: Alignment.centerLeft,
-      height: Util.getHeightValueInPixels(80),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(Strings.email,
-              style: GoogleFonts.roboto(
-                  color: Util.getColorForHex(Constants.hex_1F41BB),
-                  fontSize: Util.getHeightValueInPixels(15),
-                  fontWeight: FontWeight.w500)),
-          Expanded(
-            flex: 1,
-            child: Container(
-              padding: const EdgeInsets.all(1),
-              decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(
-                  Util.getHeightValueInPixels(17),
-                ),
-                color: Util.getColorForHex(Constants.hex_1F41BB),
-              ),
-              child: Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(
-                    Util.getHeightValueInPixels(16),
-                  ),
-                  color: Colors.white,
-                ),
-                child: TextField(
-                  controller: _emailController,
-                  decoration: InputDecoration(
-                    hintText: Strings.enterYouremail,
-                    border: InputBorder.none,
-                    isCollapsed: true, // This removes extra vertical padding
-                    contentPadding: EdgeInsets.only(left: paddingLeftValue),
-                  ),
-                  onChanged: (value) {
-                    setState(() {
-                      email = value;
-                    });
-                  },
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+    return _buildInputField(
+      label: Strings.email,
+      hintText: Strings.enterYouremail,
+      controller: _emailController,
     );
   }
 
-  Widget _passwordConatiner() {
-    double paddingLeftValue = Util.getWidthValueInPixels(10);
-    return Container(
-      alignment: Alignment.centerLeft,
-      height: Util.getHeightValueInPixels(80),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(Strings.password,
-              style: GoogleFonts.roboto(
-                  color: Util.getColorForHex(Constants.hex_1F41BB),
-                  fontSize: Util.getHeightValueInPixels(15),
-                  fontWeight: FontWeight.w500)),
-          Expanded(
-            flex: 1,
-            child: Container(
-              padding: const EdgeInsets.all(1),
-              decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(
-                  Util.getHeightValueInPixels(17),
-                ),
-                color: Util.getColorForHex(Constants.hex_1F41BB),
-              ),
-              child: Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(
-                    Util.getHeightValueInPixels(16),
-                  ),
-                  color: Colors.white,
-                ),
-                child: TextField(
-                  controller: _passwordController,
-                  decoration: InputDecoration(
-                    hintText: Strings.enterYourPass,
-                    border: InputBorder.none,
-                    isCollapsed: true, // This removes extra vertical padding
-                    contentPadding: EdgeInsets.only(left: paddingLeftValue),
-                  ),
-                  onChanged: (value) {
-                    setState(() {
-                      password = value;
-                    });
-                  },
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+  /// Password input field container
+  Widget _passwordContainer() {
+    return _buildInputField(
+      label: Strings.password,
+      hintText: Strings.enterYourPass,
+      controller: _passwordController,
+      isPassword: true,
     );
   }
 
+  /// Primary login button
   Widget _loginButton() {
-    return Container(
-      alignment: Alignment.center,
-      height: Util.getHeightValueInPixels(60),
-      decoration: BoxDecoration(
-        shape: BoxShape.rectangle,
-        borderRadius: BorderRadius.circular(30),
-        color: Util.getColorForHex(Constants.hex_1F41BB),
-      ),
-      child: Text(
-        Strings.login,
-        style: GoogleFonts.roboto(
-            color: Colors.white,
-            fontSize: Util.getHeightValueInPixels(20),
-            fontWeight: FontWeight.w500),
+    return GestureDetector(
+      onTap: _handleLogin,
+      child: Container(
+        height: Util.getHeightValueInPixels(60),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          color: _brandColor,
+        ),
+        child: Center(
+          child: Text(Strings.login, style: _buttonTextStyle),
+        ),
       ),
     );
   }
 
+  /// Horizontal divider line
   Widget _horizontalLineWidget() {
     return Container(
-      height: Util.getHeightValueInPixels(1),
+      height: 1,
       color: Colors.black,
     );
   }
 
+  /// Google OAuth login button
   Widget _googleLoginWidget() {
-    return Container(
-      alignment: Alignment.center,
-      height: Util.getHeightValueInPixels(60),
-      padding: EdgeInsets.all(Util.getHeightValueInPixels(1)),
-      decoration: BoxDecoration(
-          shape: BoxShape.rectangle,
-          borderRadius: BorderRadius.circular(Util.getHeightValueInPixels(17)),
-          color: Colors.black),
+    return GestureDetector(
+      onTap: _handleGoogleLogin,
       child: Container(
-        alignment: Alignment.center,
         height: Util.getHeightValueInPixels(60),
         decoration: BoxDecoration(
-            shape: BoxShape.rectangle,
-            borderRadius:
-                BorderRadius.circular(Util.getHeightValueInPixels(16)),
-            color: Colors.white),
+          borderRadius: BorderRadius.circular(Util.getHeightValueInPixels(17)),
+          border: Border.all(color: Colors.black, width: 1),
+          color: Colors.white,
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
+            Padding(
               padding: const EdgeInsets.all(14),
               child: Image.asset(Constants.googleLogoIcon),
             ),
@@ -316,32 +257,42 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
     );
   }
 
+  /// Registration link widget
   Widget _registerWidget() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Container(),
-        Text(
-          Strings.dontHaveAnAccount,
-          style: GoogleFonts.roboto(
-              color: Colors.black, fontSize: 15, fontWeight: FontWeight.w500),
-        ),
-        Util.getSpacer(Util.getWidthValueInPixels(5), false),
+        Text(Strings.dontHaveAnAccount, style: _bodyStyle),
+        SizedBox(width: Util.getWidthValueInPixels(5)),
         GestureDetector(
-          onTap: () {},
+          onTap: _handleRegister,
           child: Text(
             Strings.register,
-            style: GoogleFonts.roboto(
-              color: Util.getColorForHex(Constants.hex_1F41BB),
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
+            style: _labelStyle.copyWith(
               decoration: TextDecoration.underline,
-              decorationColor: Util.getColorForHex(Constants.hex_1F41BB),
+              decorationColor: _brandColor,
             ),
           ),
-        )
+        ),
       ],
     );
+  }
+
+  // Event handlers
+  void _handleLogin() {
+    // TODO: Implement login logic
+    final email = _emailController.text;
+    final password = _passwordController.text;
+    print('Login attempt: $email');
+  }
+
+  void _handleGoogleLogin() {
+    // TODO: Implement Google OAuth
+    print('Google login attempt');
+  }
+
+  void _handleRegister() {
+    // TODO: Navigate to registration screen
+    print('Navigate to register screen');
   }
 }
