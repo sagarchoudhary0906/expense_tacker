@@ -5,6 +5,7 @@ import '../../utiility/constants.dart';
 import '../../utiility/strings.dart';
 import '../../utiility/util.dart';
 import '../commonWidgets/common_widgets.dart';
+import 'login_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -92,6 +93,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
         SizedBox(height: Util.getHeightValueInPixels(20)),
         _registerTextWidget(),
         _registerSubTextWidget(),
+        SizedBox(height: Util.getHeightValueInPixels(40)),
+        CommonWidgets.emailContainer(
+            _emailController, _labelStyle, _brandColor),
+        SizedBox(height: Util.getHeightValueInPixels(30)),
+        CommonWidgets.passwordContainer(
+            _passwordController, _labelStyle, _brandColor),
+        SizedBox(height: Util.getHeightValueInPixels(30)),
+        CommonWidgets.addYourNameContainer(
+            _nameController, _labelStyle, _brandColor),
+        SizedBox(height: Util.getHeightValueInPixels(50)),
+        _registerButton(),
+        SizedBox(height: Util.getHeightValueInPixels(20)),
+        CommonWidgets.horizontalLineWidget(),
+        SizedBox(height: Util.getHeightValueInPixels(20)),
+        _alreadyHaveAccountLoginWidget()
       ],
     );
   }
@@ -120,6 +136,57 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _registerButton() {
+    return GestureDetector(
+      onTap: _handleRegister,
+      child: Container(
+        height: Util.getHeightValueInPixels(60),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          color: _brandColor,
+        ),
+        child: Center(
+          child: Text(Strings.register, style: _buttonTextStyle),
+        ),
+      ),
+    );
+  }
+
+  Widget _alreadyHaveAccountLoginWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(Strings.alreadyHaveAnAccount, style: _bodyStyle),
+        SizedBox(width: Util.getWidthValueInPixels(5)),
+        GestureDetector(
+          onTap: _handleLogin,
+          child: Text(
+            Strings.login,
+            style: _labelStyle.copyWith(
+              decoration: TextDecoration.underline,
+              decorationColor: _brandColor,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  void _handleRegister() {
+    // TODO: Implement login logic
+    final email = _emailController.text;
+    final password = _passwordController.text;
+    final name = _nameController.text;
+    print('Register attempt: $email  $password $name');
+  }
+
+  void _handleLogin() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const LoginScreenV1()),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:expense_tracker/screens/login_screen_v1/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -98,13 +99,15 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
         _loginTextWidget(),
         _loginSubTextWidget(),
         SizedBox(height: Util.getHeightValueInPixels(40)),
-        _emailContainer(),
-        SizedBox(height: Util.getHeightValueInPixels(40)),
-        _passwordContainer(),
-        SizedBox(height: Util.getHeightValueInPixels(40)),
+        CommonWidgets.emailContainer(
+            _emailController, _labelStyle, _brandColor),
+        SizedBox(height: Util.getHeightValueInPixels(30)),
+        CommonWidgets.passwordContainer(
+            _passwordController, _labelStyle, _brandColor),
+        SizedBox(height: Util.getHeightValueInPixels(50)),
         _loginButton(),
         SizedBox(height: Util.getHeightValueInPixels(20)),
-        _horizontalLineWidget(),
+        CommonWidgets.horizontalLineWidget(),
         SizedBox(height: Util.getHeightValueInPixels(20)),
         _googleLoginWidget(),
         SizedBox(height: Util.getHeightValueInPixels(40)),
@@ -170,25 +173,6 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
     );
   }
 
-  /// Email input field container
-  Widget _emailContainer() {
-    return _buildInputField(
-      label: Strings.email,
-      hintText: Strings.enterYouremail,
-      controller: _emailController,
-    );
-  }
-
-  /// Password input field container
-  Widget _passwordContainer() {
-    return _buildInputField(
-      label: Strings.password,
-      hintText: Strings.enterYourPass,
-      controller: _passwordController,
-      isPassword: true,
-    );
-  }
-
   /// Primary login button
   Widget _loginButton() {
     return GestureDetector(
@@ -203,14 +187,6 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
           child: Text(Strings.login, style: _buttonTextStyle),
         ),
       ),
-    );
-  }
-
-  /// Horizontal divider line
-  Widget _horizontalLineWidget() {
-    return Container(
-      height: 1,
-      color: Colors.black,
     );
   }
 
@@ -281,7 +257,9 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
   }
 
   void _handleRegister() {
-    // TODO: Navigate to registration screen
-    print('Navigate to register screen');
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const RegisterScreen()),
+    );
   }
 }
