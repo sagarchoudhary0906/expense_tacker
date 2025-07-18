@@ -26,4 +26,5 @@ class Strings {
   static const String alreadyHaveAnAccount = "Already have an account?";
   static const String pleaseEnterValidEmail =
       "Please enter a valid email address";
+  static const String emailVerificationSent = "Email verification sent!";
 }

@@ -1,3 +1,5 @@
+import 'package:expense_tracker/services/firebase_auth_methods.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -287,9 +289,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       });
       return;
     }
-
-    // TODO: Implement registration logic
-    print('Register attempt: $email  $password $name');
+    FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmail(
+        email: email, password: password, name: name, context: context);
   }
 
   /// Navigates to the login screen and closes the register screen

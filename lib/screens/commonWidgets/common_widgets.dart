@@ -128,4 +128,8 @@ class CommonWidgets {
       color: Colors.black,
     );
   }
+
+  static void showSnackBar(BuildContext context, String msg) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
+  }
 }
