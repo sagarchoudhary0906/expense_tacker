@@ -25,6 +25,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
 
+  // Focus nodes for keyboard management
+  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
+  final FocusNode _nameFocusNode = FocusNode();
+
+  // Email validation state
+  bool _isEmailValid = true;
+  String _emailError = '';
+
   // Cached colors and styles for better performance
   late final Color _brandColor;
   late final Color _backgroundColor;
@@ -32,11 +41,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
   late final TextStyle _labelStyle;
   late final TextStyle _bodyStyle;
   late final TextStyle _buttonTextStyle;
+  late final TextStyle _errorStyle;
 
   @override
   void initState() {
     super.initState();
     _initializeStyles();
+    _setupEmailListener();
   }
 
   /// Initializes color and text styles for the screen.
@@ -67,6 +78,45 @@ class _RegisterScreenState extends State<RegisterScreen> {
       fontSize: Util.getHeightValueInPixels(20),
       fontWeight: FontWeight.w500,
     );
+
+    _errorStyle = GoogleFonts.roboto(
+      color: Colors.red,
+      fontSize: Util.getHeightValueInPixels(12),
+      fontWeight: FontWeight.w400,
+    );
+  }
+
+  /// Validates email format using regex pattern
+  bool _isValidEmail(String email) {
+    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    return emailRegex.hasMatch(email);
+  }
+
+  /// Validates email and updates error state
+  void _validateEmail(String email) {
+    if (email.isEmpty) {
+      setState(() {
+        _isEmailValid = true;
+        _emailError = '';
+      });
+    } else if (!_isValidEmail(email)) {
+      setState(() {
+        _isEmailValid = false;
+        _emailError = Strings.pleaseEnterValidEmail;
+      });
+    } else {
+      setState(() {
+        _isEmailValid = true;
+        _emailError = '';
+      });
+    }
+  }
+
+  /// Sets up listener for email validation
+  void _setupEmailListener() {
+    _emailController.addListener(() {
+      _validateEmail(_emailController.text);
+    });
   }
 
   @override
@@ -75,19 +125,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     _nameController.dispose();
+    _emailFocusNode.dispose();
+    _passwordFocusNode.dispose();
+    _nameFocusNode.dispose();
     super.dispose();
+  }
+
+  /// Hides keyboard and removes focus when tapping outside
+  void _hideKeyboard() {
+    FocusScope.of(context).unfocus();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: _backgroundColor,
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: Util.getWidthValueInPixels(50),
+    return GestureDetector(
+      onTap: _hideKeyboard,
+      child: Scaffold(
+        backgroundColor: _backgroundColor,
+        body: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: Util.getWidthValueInPixels(50),
+            ),
+            child: _mainContent(),
           ),
-          child: _mainContent(),
         ),
       ),
     );
@@ -104,14 +165,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
         _registerTextWidget(), // "Register" title
         _registerSubTextWidget(), // Subtitle with bold app name
         SizedBox(height: Util.getHeightValueInPixels(40)),
-        CommonWidgets.emailContainer(
-            _emailController, _labelStyle, _brandColor), // Email input
+        CommonWidgets.emailContainer(_emailController, _labelStyle, _brandColor,
+            _isEmailValid, _emailFocusNode), // Email input
+        if (!_isEmailValid) ...[
+          SizedBox(height: Util.getHeightValueInPixels(8)),
+          _emailErrorWidget(),
+        ],
         SizedBox(height: Util.getHeightValueInPixels(30)),
-        CommonWidgets.passwordContainer(
-            _passwordController, _labelStyle, _brandColor), // Password input
+        CommonWidgets.passwordContainer(_passwordController, _labelStyle,
+            _brandColor, _passwordFocusNode), // Password input
         SizedBox(height: Util.getHeightValueInPixels(30)),
-        CommonWidgets.addYourNameContainer(
-            _nameController, _labelStyle, _brandColor), // Name input
+        CommonWidgets.addYourNameContainer(_nameController, _labelStyle,
+            _brandColor, _nameFocusNode), // Name input
         SizedBox(height: Util.getHeightValueInPixels(50)),
         _registerButton(), // Register button
         SizedBox(height: Util.getHeightValueInPixels(20)),
@@ -168,6 +233,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
+  /// Email error message widget
+  Widget _emailErrorWidget() {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Text(
+        _emailError,
+        style: _errorStyle,
+      ),
+    );
+  }
+
   /// Widget for "Already have an account? Login" with clickable login link
   Widget _alreadyHaveAccountLoginWidget() {
     return Row(
@@ -191,10 +267,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   /// Handles registration logic (to be implemented)
   void _handleRegister() {
-    // TODO: Implement registration logic
     final email = _emailController.text;
     final password = _passwordController.text;
     final name = _nameController.text;
+
+    // Validate email before proceeding
+    if (email.isEmpty) {
+      setState(() {
+        _isEmailValid = false;
+        _emailError = Strings.pleaseEnterValidEmail;
+      });
+      return;
+    }
+
+    if (!_isValidEmail(email)) {
+      setState(() {
+        _isEmailValid = false;
+        _emailError = Strings.pleaseEnterValidEmail;
+      });
+      return;
+    }
+
+    // TODO: Implement registration logic
     print('Register attempt: $email  $password $name');
   }
 

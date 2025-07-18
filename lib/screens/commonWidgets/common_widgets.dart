@@ -20,6 +20,7 @@ class CommonWidgets {
     required TextStyle labelStyle,
     required Color brandColor,
     bool isPassword = false,
+    FocusNode? focusNode,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,6 +38,7 @@ class CommonWidgets {
           ),
           child: TextField(
             controller: controller,
+            focusNode: focusNode,
             obscureText: isPassword,
             decoration: InputDecoration(
               hintText: hintText,
@@ -71,13 +73,16 @@ class CommonWidgets {
     TextEditingController emailController,
     TextStyle labelStyle,
     Color brandColor,
+    bool isValid,
+    FocusNode? focusNode,
   ) {
     return _buildInputField(
       label: Strings.email,
       hintText: Strings.enterYouremail,
       controller: emailController,
       labelStyle: labelStyle,
-      brandColor: brandColor,
+      brandColor: isValid ? brandColor : Colors.red,
+      focusNode: focusNode,
     );
   }
 
@@ -86,6 +91,7 @@ class CommonWidgets {
     TextEditingController passwordController,
     TextStyle labelStyle,
     Color brandColor,
+    FocusNode? focusNode,
   ) {
     return _buildInputField(
       label: Strings.password,
@@ -94,6 +100,7 @@ class CommonWidgets {
       labelStyle: labelStyle,
       brandColor: brandColor,
       isPassword: true, // Ensures password is obscured
+      focusNode: focusNode,
     );
   }
 
@@ -102,6 +109,7 @@ class CommonWidgets {
     TextEditingController nameController,
     TextStyle labelStyle,
     Color brandColor,
+    FocusNode? focusNode,
   ) {
     return _buildInputField(
       label: Strings.yourName,
@@ -109,6 +117,7 @@ class CommonWidgets {
       controller: nameController,
       labelStyle: labelStyle,
       brandColor: brandColor,
+      focusNode: focusNode,
     );
   }
 

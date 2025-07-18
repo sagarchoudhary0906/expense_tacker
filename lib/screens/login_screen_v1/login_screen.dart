@@ -25,6 +25,14 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  // Focus nodes for keyboard management
+  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
+
+  // Email validation state
+  bool _isEmailValid = true;
+  String _emailError = '';
+
   // Cached colors and styles for better performance
   late final Color _brandColor;
   late final Color _backgroundColor;
@@ -32,11 +40,13 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
   late final TextStyle _labelStyle;
   late final TextStyle _bodyStyle;
   late final TextStyle _buttonTextStyle;
+  late final TextStyle _errorStyle;
 
   @override
   void initState() {
     super.initState();
     _initializeStyles();
+    _setupEmailListener();
   }
 
   void _initializeStyles() {
@@ -66,24 +76,73 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
       fontSize: Util.getHeightValueInPixels(20),
       fontWeight: FontWeight.w500,
     );
+
+    _errorStyle = GoogleFonts.roboto(
+      color: Colors.red,
+      fontSize: Util.getHeightValueInPixels(12),
+      fontWeight: FontWeight.w400,
+    );
   }
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _emailFocusNode.dispose();
+    _passwordFocusNode.dispose();
     super.dispose();
+  }
+
+  /// Validates email format using regex pattern
+  bool _isValidEmail(String email) {
+    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    return emailRegex.hasMatch(email);
+  }
+
+  /// Validates email and updates error state
+  void _validateEmail(String email) {
+    if (email.isEmpty) {
+      setState(() {
+        _isEmailValid = true;
+        _emailError = '';
+      });
+    } else if (!_isValidEmail(email)) {
+      setState(() {
+        _isEmailValid = false;
+        _emailError = Strings.pleaseEnterValidEmail;
+      });
+    } else {
+      setState(() {
+        _isEmailValid = true;
+        _emailError = '';
+      });
+    }
+  }
+
+  /// Sets up listener for email validation
+  void _setupEmailListener() {
+    _emailController.addListener(() {
+      _validateEmail(_emailController.text);
+    });
+  }
+
+  /// Hides keyboard and removes focus when tapping outside
+  void _hideKeyboard() {
+    FocusScope.of(context).unfocus();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: _backgroundColor,
-      body: SafeArea(
-        child: Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: Util.getWidthValueInPixels(50)),
-          child: _mainContent(),
+    return GestureDetector(
+      onTap: _hideKeyboard,
+      child: Scaffold(
+        backgroundColor: _backgroundColor,
+        body: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: Util.getWidthValueInPixels(50)),
+            child: _mainContent(),
+          ),
         ),
       ),
     );
@@ -99,11 +158,15 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
         _loginTextWidget(),
         _loginSubTextWidget(),
         SizedBox(height: Util.getHeightValueInPixels(40)),
-        CommonWidgets.emailContainer(
-            _emailController, _labelStyle, _brandColor),
+        CommonWidgets.emailContainer(_emailController, _labelStyle, _brandColor,
+            _isEmailValid, _emailFocusNode),
+        if (!_isEmailValid) ...[
+          SizedBox(height: Util.getHeightValueInPixels(8)),
+          _emailErrorWidget(),
+        ],
         SizedBox(height: Util.getHeightValueInPixels(30)),
         CommonWidgets.passwordContainer(
-            _passwordController, _labelStyle, _brandColor),
+            _passwordController, _labelStyle, _brandColor, _passwordFocusNode),
         SizedBox(height: Util.getHeightValueInPixels(50)),
         _loginButton(),
         SizedBox(height: Util.getHeightValueInPixels(20)),
@@ -132,44 +195,6 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
         Strings.loginNowToTrackAllYourExpenses,
         style: _bodyStyle,
       ),
-    );
-  }
-
-  /// Reusable input field widget
-  Widget _buildInputField({
-    required String label,
-    required String hintText,
-    required TextEditingController controller,
-    bool isPassword = false,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label, style: _labelStyle),
-        SizedBox(height: Util.getHeightValueInPixels(8)),
-        Container(
-          height: Util.getHeightValueInPixels(50),
-          decoration: BoxDecoration(
-            borderRadius:
-                BorderRadius.circular(Util.getHeightValueInPixels(17)),
-            border: Border.all(color: _brandColor, width: 1),
-          ),
-          child: TextField(
-            controller: controller,
-            obscureText: isPassword,
-            decoration: InputDecoration(
-              hintText: hintText,
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.symmetric(
-                horizontal:
-                    Util.getWidthValueInPixels(15), // Left and right padding
-                vertical: Util.getHeightValueInPixels(
-                    12), // Top and bottom padding for vertical centering
-              ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 
@@ -222,6 +247,17 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
     );
   }
 
+  /// Email error message widget
+  Widget _emailErrorWidget() {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Text(
+        _emailError,
+        style: _errorStyle,
+      ),
+    );
+  }
+
   /// Registration link widget
   Widget _registerWidget() {
     return Row(
@@ -245,9 +281,27 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
 
   // Event handlers
   void _handleLogin() {
-    // TODO: Implement login logic
     final email = _emailController.text;
     final password = _passwordController.text;
+
+    // Validate email before proceeding
+    if (email.isEmpty) {
+      setState(() {
+        _isEmailValid = false;
+        _emailError = Strings.pleaseEnterValidEmail;
+      });
+      return;
+    }
+
+    if (!_isValidEmail(email)) {
+      setState(() {
+        _isEmailValid = false;
+        _emailError = Strings.pleaseEnterValidEmail;
+      });
+      return;
+    }
+
+    // TODO: Implement login logic
     print('Login attempt: $email');
   }
 

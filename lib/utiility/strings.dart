@@ -24,4 +24,6 @@ class Strings {
   static const String yourName = "Your Name";
   static const String enterYourName = "Enter Your Name";
   static const String alreadyHaveAnAccount = "Already have an account?";
+  static const String pleaseEnterValidEmail =
+      "Please enter a valid email address";
 }
