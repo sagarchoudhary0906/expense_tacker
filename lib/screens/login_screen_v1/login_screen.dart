@@ -164,7 +164,7 @@ class _LoginScreenV1State extends State<LoginScreenV1> {
           SizedBox(height: Util.getHeightValueInPixels(8)),
           _emailErrorWidget(),
         ],
-        SizedBox(height: Util.getHeightValueInPixels(30)),
+        SizedBox(height: Util.getHeightValueInPixels(_isEmailValid ? 30 : 8)),
         CommonWidgets.passwordContainer(
             _passwordController, _labelStyle, _brandColor, _passwordFocusNode),
         SizedBox(height: Util.getHeightValueInPixels(50)),

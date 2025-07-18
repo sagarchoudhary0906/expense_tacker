@@ -171,7 +171,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           SizedBox(height: Util.getHeightValueInPixels(8)),
           _emailErrorWidget(),
         ],
-        SizedBox(height: Util.getHeightValueInPixels(30)),
+        SizedBox(height: Util.getHeightValueInPixels(_isEmailValid ? 30 : 8)),
         CommonWidgets.passwordContainer(_passwordController, _labelStyle,
             _brandColor, _passwordFocusNode), // Password input
         SizedBox(height: Util.getHeightValueInPixels(30)),
