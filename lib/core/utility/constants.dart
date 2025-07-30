@@ -16,4 +16,6 @@ class Constants {
   static const String hex_52b69a = "52b69a";
   static const String hex_1F41BB = "1F41BB";
   static const String hex_f8f7ff = "f8f7ff";
+  static const String HEXA773C1 = "a773c1";
+  static const String HEXFFD9CB = "ffd9cb";
 }

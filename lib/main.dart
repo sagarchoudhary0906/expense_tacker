@@ -2,8 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'firebase_options.dart';
-import 'screens/login_screen_v1/login_screen.dart';
-import 'utiility/device_info.dart';
+import 'core/utility/device_info.dart';
+import 'screens/introScreens/intro_screen_v1.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
 
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreenV1(),
+      home: IntroScreenV1(),
     );
   }
 }

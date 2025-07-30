@@ -1,4 +1,4 @@
-import 'package:expense_tracker/utiility/device_info.dart';
+import 'package:expense_tracker/core/utility/device_info.dart';
 import 'package:flutter/material.dart';
 
 class Util {

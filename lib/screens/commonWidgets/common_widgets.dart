@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../utiility/strings.dart';
-import '../../utiility/util.dart';
+import '../../core/utility/strings.dart';
+import '../../core/utility/util.dart';
 
 /// A utility class for common reusable widgets across the app.
 class CommonWidgets {

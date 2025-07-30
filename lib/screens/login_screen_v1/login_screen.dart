@@ -2,9 +2,9 @@ import 'package:expense_tracker/screens/login_screen_v1/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../utiility/constants.dart';
-import '../../utiility/strings.dart';
-import '../../utiility/util.dart';
+import '../../core/utility/constants.dart';
+import '../../core/utility/strings.dart';
+import '../../core/utility/util.dart';
 import '../commonWidgets/common_widgets.dart';
 
 /// Login Screen Version 1 - A modern login interface with email/password and Google OAuth

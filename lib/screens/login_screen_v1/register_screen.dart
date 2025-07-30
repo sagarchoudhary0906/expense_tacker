@@ -3,9 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../utiility/constants.dart';
-import '../../utiility/strings.dart';
-import '../../utiility/util.dart';
+import '../../core/utility/constants.dart';
+import '../../core/utility/strings.dart';
+import '../../core/utility/util.dart';
 import '../commonWidgets/common_widgets.dart';
 import 'login_screen.dart';
 
