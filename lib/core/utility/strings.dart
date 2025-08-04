@@ -27,4 +27,11 @@ class Strings {
   static const String pleaseEnterValidEmail =
       "Please enter a valid email address";
   static const String emailVerificationSent = "Email verification sent!";
+  static const String sayHiToYourNew = "Say hi to your new";
+  static const String financeTracker = "finance tracker";
+  static const String youAreAmazingForTakingThisFirstStep =
+      "You're amazing for taking this first step";
+  static const String towardsGettingBetterControlOverYour =
+      "towards getting better control over your";
+  static const String moneyAndFinancialGoals = "money and financial goals";
 }
