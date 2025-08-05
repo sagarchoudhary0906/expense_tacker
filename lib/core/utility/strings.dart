@@ -34,4 +34,5 @@ class Strings {
   static const String towardsGettingBetterControlOverYour =
       "towards getting better control over your";
   static const String moneyAndFinancialGoals = "money and financial goals";
+  static const String getStarted = "Get Started";
 }
