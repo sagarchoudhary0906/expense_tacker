@@ -10,11 +10,12 @@ class IntroScreenV1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         child: Stack(
           alignment: Alignment.topCenter,
           children: [
+            // Background gradient
             Container(
               height: Util.getFullScreenHeight(),
               decoration: BoxDecoration(
@@ -28,6 +29,7 @@ class IntroScreenV1 extends StatelessWidget {
                 ),
               ),
             ),
+            // Top curve shadow
             PhysicalShape(
               clipper: TopCurveClipper(),
               color: Colors.transparent,
@@ -37,7 +39,7 @@ class IntroScreenV1 extends StatelessWidget {
                 height: Util.getFullScreenHeight() * 0.5,
               ),
             ),
-            // Gradient layer using ClipPath
+            // Top curve gradient overlay
             ClipPath(
               clipper: TopCurveClipper(),
               child: Container(
@@ -49,7 +51,7 @@ class IntroScreenV1 extends StatelessWidget {
               ),
             ),
 
-            // Adding First Intro Screen Text
+            // Main title text
             Positioned(
               top: Util.getFullScreenHeight() * 0.5,
               left: Util.getFullScreenWidth() * 0.5 -
@@ -58,31 +60,33 @@ class IntroScreenV1 extends StatelessWidget {
                 height: Util.getHeightValueInPixels(48),
                 width: Util.getWidthValueInPixels(175),
                 child: FittedBox(
-                    fit: BoxFit.contain,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          Strings.sayHiToYourNew,
-                          style: TextStyle(
-                            fontSize: Util.getWidthValueInPixels(20),
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white,
-                          ),
+                  fit: BoxFit.contain,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        Strings.sayHiToYourNew,
+                        style: TextStyle(
+                          fontSize: Util.getWidthValueInPixels(20),
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
                         ),
-                        Text(
-                          Strings.financeTracker,
-                          style: TextStyle(
-                            fontSize: Util.getWidthValueInPixels(20),
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white,
-                          ),
+                      ),
+                      Text(
+                        Strings.financeTracker,
+                        style: TextStyle(
+                          fontSize: Util.getWidthValueInPixels(20),
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
                         ),
-                      ],
-                    )),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
 
+            // Subtitle/description text
             Positioned(
               top: (Util.getFullScreenHeight() * 0.5) +
                   (Util.getHeightValueInPixels(80)),
@@ -124,39 +128,80 @@ class IntroScreenV1 extends StatelessWidget {
                   ),
                 ),
               ),
-            )
+            ),
+
+            // Progress Dots (refactored to use _buildDot)
+            Positioned(
+              top: (Util.getFullScreenHeight() * 0.5) +
+                  (Util.getHeightValueInPixels(165)),
+              left: Util.getFullScreenWidth() * 0.5 -
+                  (Util.getWidthValueInPixels(76 / 2)),
+              child: SizedBox(
+                height: Util.getHeightValueInPixels(12),
+                width: Util.getWidthValueInPixels(76),
+                child: const FittedBox(
+                  fit: BoxFit.contain,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // First dot is active, others are inactive
+                      // This can be made dynamic if needed
+                      // e.g., pass an index or state
+                      _Dot(isActive: true),
+                      _Dot(isActive: false),
+                      _Dot(isActive: false),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
+}
 
-  Widget _buildDot(bool isActive) {
+/// Private widget for a single dot, for clarity and reusability
+class _Dot extends StatelessWidget {
+  final bool isActive;
+  const _Dot({required this.isActive});
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 6),
-      width: isActive ? 12 : 10,
-      height: isActive ? 12 : 10,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: isActive ? Colors.white : Colors.white38,
-      ),
+      width: Util.getWidthValueInPixels(12),
+      height: Util.getHeightValueInPixels(12),
+      decoration: isActive
+          ? const BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white, // filled circle
+            )
+          : BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: Colors.white, // ring color
+                width: Util.getWidthValueInPixels(2), // ring thickness
+              ),
+              color: Colors.transparent, // ring with transparent center
+            ),
     );
   }
 }
 
+/// Custom clipper for the top curve
 class TopCurveClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     Path path = Path();
     path.lineTo(0, size.height * 0.85);
-
     path.quadraticBezierTo(
       size.width / 2,
       size.height,
       size.width,
       size.height * 0.85,
     );
-
     path.lineTo(size.width, 0);
     path.close();
     return path;
