@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'firebase_options.dart';
 import 'core/utility/device_info.dart';
-import 'screens/introScreens/intro_screen_v1.dart';
+import 'screens/introScreens/intro_screen_first_v1.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
 
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: IntroScreenV1(),
+      home: IntroScreenFirstV1(),
     );
   }
 }
