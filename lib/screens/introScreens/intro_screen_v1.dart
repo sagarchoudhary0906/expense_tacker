@@ -3,9 +3,31 @@ import 'package:flutter/material.dart';
 import '../../core/utility/constants.dart';
 import '../../core/utility/strings.dart';
 import '../../core/utility/util.dart';
+import '../commonWidgets/pillShapeButton.dart';
 
 class IntroScreenV1 extends StatelessWidget {
   const IntroScreenV1({super.key});
+
+  Widget _getStartedCtaChildWidget() {
+    return Center(
+      child: Text(
+        Strings.getStarted,
+        style: TextStyle(
+          fontSize: Util.getWidthValueInPixels(16),
+          fontWeight: FontWeight.w700,
+          foreground: Paint()
+            ..shader = LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: [
+                Util.getColorForHex(Constants.HEXFFB1b1),
+                Util.getColorForHex(Constants.HEXB684C3)
+              ], // your gradient colors
+            ).createShader(const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0)),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -161,41 +183,15 @@ class IntroScreenV1 extends StatelessWidget {
               bottom: Util.getHeightValueInPixels(136),
               left: Util.getFullScreenWidth() * 0.5 -
                   (Util.getWidthValueInPixels(277 / 2)),
-              child: SizedBox(
-                width: Util.getWidthValueInPixels(277),
-                height: Util.getHeightValueInPixels(46),
-                child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(
-                          Util.getWidthValueInPixels(52.5)),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.black26, // Shadow color
-                          blurRadius: 4, // Softness of the shadow
-                          offset: Offset(0, 4), // Position of the shadow
-                        ),
-                      ],
-                    ),
-                    child: Center(
-                      child: Text(
-                        Strings.getStarted,
-                        style: TextStyle(
-                          fontSize: Util.getWidthValueInPixels(16),
-                          fontWeight: FontWeight.w700,
-                          foreground: Paint()
-                            ..shader = LinearGradient(
-                              begin: Alignment.centerLeft,
-                              end: Alignment.centerRight,
-                              colors: [
-                                Util.getColorForHex(Constants.HEXFFB1b1),
-                                Util.getColorForHex(Constants.HEXB684C3)
-                              ], // your gradient colors
-                            ).createShader(
-                                const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0)),
-                        ),
-                      ),
-                    )),
+              child: PillShapeButton(
+                color: Colors.white,
+                borderRadius: 52.5,
+                height: 48,
+                width: 277,
+                shadowColor: Colors.black26,
+                shadowBlurRadius: 4,
+                shadowOffset: const Offset(0, 4),
+                child: _getStartedCtaChildWidget(),
               ),
             ),
           ],
