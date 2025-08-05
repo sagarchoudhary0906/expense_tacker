@@ -1,46 +1,33 @@
+import 'package:expense_tracker/screens/introScreens/widgets/intro_screen_button.dart';
+import 'package:expense_tracker/screens/introScreens/widgets/second_into_texrt.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/utility/constants.dart';
 import '../../core/utility/strings.dart';
 import '../../core/utility/util.dart';
-import 'intro_screen_second_v1.dart';
 import 'widgets/colorful_clipper.dart';
 import 'widgets/first_intro_text.dart';
 import 'widgets/gradient_bg.dart';
 import 'widgets/intro_screen_dots.dart';
 import 'widgets/top_curve_shadow.dart';
-import 'widgets/intro_screen_button.dart';
-import 'widgets/second_into_texrt.dart';
 
-class IntroScreenFirstV1 extends StatelessWidget {
-  const IntroScreenFirstV1({super.key});
+class IntroScreenThirdV1 extends StatelessWidget {
+  const IntroScreenThirdV1({super.key});
 
   /// First Intro Screen CTA Widget
-  Widget _getStartedCtaChildWidget(BuildContext context) {
+  Widget _getStartedCtaChildWidget() {
     return Material(
       color: Colors.transparent,
       child: InkWell(
         borderRadius: BorderRadius.circular(30),
         onTap: () {
-          Navigator.of(context).push(
-            PageRouteBuilder(
-              pageBuilder: (context, animation, secondaryAnimation) =>
-                  const IntroScreenSecondV1(),
-              transitionsBuilder:
-                  (context, animation, secondaryAnimation, child) {
-                return FadeTransition(
-                  opacity: animation,
-                  child: child,
-                );
-              },
-            ),
-          );
+          // TODO: ADD LOGIC FUNCTIONALITY HERE
         },
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           child: Center(
             child: Text(
-              Strings.getStarted.toUpperCase(),
+              Strings.iAmReady.toUpperCase(),
               style: TextStyle(
                 fontSize: Util.getWidthValueInPixels(16),
                 fontWeight: FontWeight.w700,
@@ -102,12 +89,12 @@ class IntroScreenFirstV1 extends StatelessWidget {
           (Util.getWidthValueInPixels(76 / 2)),
       width: Util.getWidthValueInPixels(76),
       height: Util.getHeightValueInPixels(30),
-      isActiveList: const [true, false, false],
+      isActiveList: const [false, false, true],
       activeColor: Colors.white,
     );
   }
 
-  Widget _introScreenButtonWidget(BuildContext context) {
+  Widget _introScreenButtonWidget() {
     return IntroScreenButton(
       bottomShift: Util.getHeightValueInPixels(136),
       leftShift: Util.getFullScreenWidth() * 0.5 -
@@ -119,7 +106,7 @@ class IntroScreenFirstV1 extends StatelessWidget {
       shadowBlurRadius: Util.getWidthValueInPixels(4),
       shadowOffset: const Offset(0, 4),
       borderRadius: Util.getWidthValueInPixels(52.5),
-      child: _getStartedCtaChildWidget(context),
+      child: _getStartedCtaChildWidget(),
     );
   }
 
@@ -162,7 +149,7 @@ class IntroScreenFirstV1 extends StatelessWidget {
             /**
              * Adding Intro Screen Button
              */
-            _introScreenButtonWidget(context),
+            _introScreenButtonWidget(),
           ],
         ),
       ),

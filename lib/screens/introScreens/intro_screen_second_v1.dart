@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/utility/constants.dart';
 import '../../core/utility/strings.dart';
 import '../../core/utility/util.dart';
-import 'intro_screen_second_v1.dart';
+import 'intro_screen_third_v1.dart';
 import 'widgets/colorful_clipper.dart';
 import 'widgets/first_intro_text.dart';
 import 'widgets/gradient_bg.dart';
@@ -12,8 +12,8 @@ import 'widgets/top_curve_shadow.dart';
 import 'widgets/intro_screen_button.dart';
 import 'widgets/second_into_texrt.dart';
 
-class IntroScreenFirstV1 extends StatelessWidget {
-  const IntroScreenFirstV1({super.key});
+class IntroScreenSecondV1 extends StatelessWidget {
+  const IntroScreenSecondV1({super.key});
 
   /// First Intro Screen CTA Widget
   Widget _getStartedCtaChildWidget(BuildContext context) {
@@ -25,7 +25,7 @@ class IntroScreenFirstV1 extends StatelessWidget {
           Navigator.of(context).push(
             PageRouteBuilder(
               pageBuilder: (context, animation, secondaryAnimation) =>
-                  const IntroScreenSecondV1(),
+                  const IntroScreenThirdV1(),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {
                 return FadeTransition(
@@ -40,7 +40,7 @@ class IntroScreenFirstV1 extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           child: Center(
             child: Text(
-              Strings.getStarted.toUpperCase(),
+              Strings.amazing.toUpperCase(),
               style: TextStyle(
                 fontSize: Util.getWidthValueInPixels(16),
                 fontWeight: FontWeight.w700,
@@ -102,7 +102,7 @@ class IntroScreenFirstV1 extends StatelessWidget {
           (Util.getWidthValueInPixels(76 / 2)),
       width: Util.getWidthValueInPixels(76),
       height: Util.getHeightValueInPixels(30),
-      isActiveList: const [true, false, false],
+      isActiveList: const [false, true, false],
       activeColor: Colors.white,
     );
   }

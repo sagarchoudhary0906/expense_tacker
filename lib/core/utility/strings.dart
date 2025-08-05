@@ -35,4 +35,6 @@ class Strings {
       "towards getting better control over your";
   static const String moneyAndFinancialGoals = "money and financial goals";
   static const String getStarted = "Get Started";
+  static const String amazing = "Amazing";
+  static const String iAmReady = "i'm ready";
 }
