@@ -49,6 +49,68 @@ class IntroScreenFirstV1 extends StatelessWidget {
     );
   }
 
+  Widget _firstIntroTextWidget() {
+    return FirstIntroText(
+      topShift: Util.getFullScreenHeight() * 0.5,
+      leftShift: Util.getFullScreenWidth() * 0.5 -
+          (Util.getWidthValueInPixels(175 / 2)),
+      width: Util.getWidthValueInPixels(175),
+      height: Util.getHeightValueInPixels(48),
+      textArray: const [Strings.sayHiToYourNew, Strings.financeTracker],
+      fontSize: 20,
+      fontWeight: FontWeight.w700,
+      color: Colors.white,
+    );
+  }
+
+  Widget _secondIntroTextWidget() {
+    return SecondIntroText(
+      topShift: (Util.getFullScreenHeight() * 0.5) +
+          (Util.getHeightValueInPixels(80)),
+      leftShift: Util.getFullScreenWidth() * 0.5 -
+          (Util.getWidthValueInPixels(285 / 2)),
+      width: Util.getWidthValueInPixels(285),
+      height: Util.getHeightValueInPixels(60),
+      textArray: const [
+        Strings.youAreAmazingForTakingThisFirstStep,
+        Strings.towardsGettingBetterControlOverYour,
+        Strings.moneyAndFinancialGoals
+      ],
+      fontSize: 15,
+      fontWeight: FontWeight.w400,
+      color: Colors.white,
+    );
+  }
+
+  Widget _introScreenDotsWidget() {
+    return IntroScreenDots(
+      topShift: (Util.getFullScreenHeight() * 0.5) +
+          (Util.getHeightValueInPixels(165)),
+      leftShift: Util.getFullScreenWidth() * 0.5 -
+          (Util.getWidthValueInPixels(76 / 2)),
+      width: Util.getWidthValueInPixels(76),
+      height: Util.getHeightValueInPixels(30),
+      isActiveList: const [true, false, false],
+      activeColor: Colors.white,
+    );
+  }
+
+  Widget _introScreenButtonWidget() {
+    return IntroScreenButton(
+      bottomShift: Util.getHeightValueInPixels(136),
+      leftShift: Util.getFullScreenWidth() * 0.5 -
+          (Util.getWidthValueInPixels(277 / 2)),
+      width: Util.getWidthValueInPixels(277),
+      height: Util.getHeightValueInPixels(48),
+      color: Colors.white,
+      shadowColor: Colors.black26,
+      shadowBlurRadius: Util.getWidthValueInPixels(4),
+      shadowOffset: const Offset(0, 4),
+      borderRadius: Util.getWidthValueInPixels(52.5),
+      child: _getStartedCtaChildWidget(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,68 +138,19 @@ class IntroScreenFirstV1 extends StatelessWidget {
             /**
              * First Intro Text (Main Title)
              */
-            FirstIntroText(
-              topShift: Util.getFullScreenHeight() * 0.5,
-              leftShift: Util.getFullScreenWidth() * 0.5 -
-                  (Util.getWidthValueInPixels(175 / 2)),
-              width: Util.getWidthValueInPixels(175),
-              height: Util.getHeightValueInPixels(48),
-              textArray: const [Strings.sayHiToYourNew, Strings.financeTracker],
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-              color: Colors.white,
-            ),
-
+            _firstIntroTextWidget(),
             /**
              * Second Intro Text (Subtitle/description text)
              */
-            SecondIntroText(
-              topShift: (Util.getFullScreenHeight() * 0.5) +
-                  (Util.getHeightValueInPixels(80)),
-              leftShift: Util.getFullScreenWidth() * 0.5 -
-                  (Util.getWidthValueInPixels(285 / 2)),
-              width: Util.getWidthValueInPixels(285),
-              height: Util.getHeightValueInPixels(60),
-              textArray: const [
-                Strings.youAreAmazingForTakingThisFirstStep,
-                Strings.towardsGettingBetterControlOverYour,
-                Strings.moneyAndFinancialGoals
-              ],
-              fontSize: 15,
-              fontWeight: FontWeight.w400,
-              color: Colors.white,
-            ),
-
+            _secondIntroTextWidget(),
             /**
              * Adding Screen Identifer Dots
              */
-            IntroScreenDots(
-              topShift: (Util.getFullScreenHeight() * 0.5) +
-                  (Util.getHeightValueInPixels(165)),
-              leftShift: Util.getFullScreenWidth() * 0.5 -
-                  (Util.getWidthValueInPixels(76 / 2)),
-              width: Util.getWidthValueInPixels(76),
-              height: Util.getHeightValueInPixels(30),
-              isActiveList: const [true, false, false],
-              activeColor: Colors.white,
-            ),
-
+            _introScreenDotsWidget(),
             /**
              * Adding Intro Screen Button
              */
-            IntroScreenButton(
-              bottomShift: Util.getHeightValueInPixels(136),
-              leftShift: Util.getFullScreenWidth() * 0.5 -
-                  (Util.getWidthValueInPixels(277 / 2)),
-              width: Util.getWidthValueInPixels(277),
-              height: Util.getHeightValueInPixels(48),
-              color: Colors.white,
-              shadowColor: Colors.black26,
-              shadowBlurRadius: Util.getWidthValueInPixels(4),
-              shadowOffset: const Offset(0, 4),
-              borderRadius: Util.getWidthValueInPixels(52.5),
-              child: _getStartedCtaChildWidget(),
-            ),
+            _introScreenButtonWidget(),
           ],
         ),
       ),
