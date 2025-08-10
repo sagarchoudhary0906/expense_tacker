@@ -27,14 +27,37 @@ class Strings {
   static const String pleaseEnterValidEmail =
       "Please enter a valid email address";
   static const String emailVerificationSent = "Email verification sent!";
-  static const String sayHiToYourNew = "Say hi to your new";
-  static const String financeTracker = "finance tracker";
-  static const String youAreAmazingForTakingThisFirstStep =
-      "You're amazing for taking this first step";
-  static const String towardsGettingBetterControlOverYour =
-      "towards getting better control over your";
-  static const String moneyAndFinancialGoals = "money and financial goals";
   static const String getStarted = "Get Started";
   static const String amazing = "Amazing";
-  static const String iAmReady = "i'm ready";
+
+  // First Intro Text
+  static const String takeControlOfYourMoney = "Take control of your";
+  static const String yourWay = "money, your way";
+  static const String welcomeToYourPersonalFinanceTracker =
+      "Welcome to your personal finance tracker — ";
+  static const String hereToMakeManagingYourMoney =
+      "here to make managing your money";
+  static const String simpleClearAndStressFree =
+      "simple, clear, and stress-free.";
+
+  // Second Intro Text
+  static const String seeWhereYourMoney = "See where your money";
+  static const String reallyGoes = "really goes.";
+
+  static const String trackEveryExpenseEffortlessly =
+      "Track every expense effortlessly, ";
+  static const String getSmartInsights = "get smart insights, and stay on top";
+  static const String ofYourBudgetLikeNeverBefore =
+      "of your budget like never before.";
+
+  // Third Intro Text
+  static const String yourGoals = "Your goals,";
+  static const String yourFuture = "your future.";
+
+  static const String whetherItsSavingForADream =
+      "Whether it’s saving for a dream, ";
+  static const String clearingDebt = "clearing debt, or growing wealth — ";
+  static const String weWillHelpYouGetThere = "we’ll help you get there.";
+  static const String imReady = "I'm ready";
+  static const String showMeHow = "Show me how";
 }

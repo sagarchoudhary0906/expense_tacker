@@ -28,11 +28,16 @@ class IntroScreenSecondV1 extends StatelessWidget {
                   const IntroScreenThirdV1(),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {
-                return FadeTransition(
-                  opacity: animation,
+                final tween = Tween<Offset>(
+                  begin: const Offset(1.0, 0.0), // from right
+                  end: Offset.zero,
+                ).chain(CurveTween(curve: Curves.easeInOut));
+                return SlideTransition(
+                  position: animation.drive(tween),
                   child: child,
                 );
               },
+              transitionDuration: const Duration(milliseconds: 300),
             ),
           );
         },
@@ -40,7 +45,7 @@ class IntroScreenSecondV1 extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           child: Center(
             child: Text(
-              Strings.amazing.toUpperCase(),
+              Strings.showMeHow.toUpperCase(),
               style: TextStyle(
                 fontSize: Util.getWidthValueInPixels(16),
                 fontWeight: FontWeight.w700,
@@ -68,7 +73,7 @@ class IntroScreenSecondV1 extends StatelessWidget {
           (Util.getWidthValueInPixels(175 / 2)),
       width: Util.getWidthValueInPixels(175),
       height: Util.getHeightValueInPixels(48),
-      textArray: const [Strings.sayHiToYourNew, Strings.financeTracker],
+      textArray: const [Strings.seeWhereYourMoney, Strings.reallyGoes],
       fontSize: 20,
       fontWeight: FontWeight.w700,
       color: Colors.white,
@@ -84,9 +89,9 @@ class IntroScreenSecondV1 extends StatelessWidget {
       width: Util.getWidthValueInPixels(285),
       height: Util.getHeightValueInPixels(60),
       textArray: const [
-        Strings.youAreAmazingForTakingThisFirstStep,
-        Strings.towardsGettingBetterControlOverYour,
-        Strings.moneyAndFinancialGoals
+        Strings.trackEveryExpenseEffortlessly,
+        Strings.getSmartInsights,
+        Strings.ofYourBudgetLikeNeverBefore
       ],
       fontSize: 15,
       fontWeight: FontWeight.w400,

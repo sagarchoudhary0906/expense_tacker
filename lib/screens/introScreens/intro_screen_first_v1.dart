@@ -28,11 +28,17 @@ class IntroScreenFirstV1 extends StatelessWidget {
                   const IntroScreenSecondV1(),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {
-                return FadeTransition(
-                  opacity: animation,
+                final tween = Tween<Offset>(
+                  begin: const Offset(1.0, 0.0), // start offscreen right
+                  end: Offset.zero, // end at center
+                ).chain(CurveTween(curve: Curves.easeInOut));
+
+                return SlideTransition(
+                  position: animation.drive(tween),
                   child: child,
                 );
               },
+              transitionDuration: const Duration(milliseconds: 300),
             ),
           );
         },
@@ -68,7 +74,7 @@ class IntroScreenFirstV1 extends StatelessWidget {
           (Util.getWidthValueInPixels(175 / 2)),
       width: Util.getWidthValueInPixels(175),
       height: Util.getHeightValueInPixels(48),
-      textArray: const [Strings.sayHiToYourNew, Strings.financeTracker],
+      textArray: const [Strings.takeControlOfYourMoney, Strings.yourWay],
       fontSize: 20,
       fontWeight: FontWeight.w700,
       color: Colors.white,
@@ -84,9 +90,9 @@ class IntroScreenFirstV1 extends StatelessWidget {
       width: Util.getWidthValueInPixels(285),
       height: Util.getHeightValueInPixels(60),
       textArray: const [
-        Strings.youAreAmazingForTakingThisFirstStep,
-        Strings.towardsGettingBetterControlOverYour,
-        Strings.moneyAndFinancialGoals
+        Strings.welcomeToYourPersonalFinanceTracker,
+        Strings.hereToMakeManagingYourMoney,
+        Strings.simpleClearAndStressFree
       ],
       fontSize: 15,
       fontWeight: FontWeight.w400,

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../core/utility/constants.dart';
 import '../../core/utility/strings.dart';
 import '../../core/utility/util.dart';
+import '../login_screen_v1/login_screen.dart';
 import 'widgets/colorful_clipper.dart';
 import 'widgets/first_intro_text.dart';
 import 'widgets/gradient_bg.dart';
@@ -15,19 +16,36 @@ class IntroScreenThirdV1 extends StatelessWidget {
   const IntroScreenThirdV1({super.key});
 
   /// First Intro Screen CTA Widget
-  Widget _getStartedCtaChildWidget() {
+  Widget _getStartedCtaChildWidget(BuildContext context) {
     return Material(
       color: Colors.transparent,
       child: InkWell(
         borderRadius: BorderRadius.circular(30),
         onTap: () {
-          // TODO: ADD LOGIC FUNCTIONALITY HERE
+          Navigator.of(context).push(
+            PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) =>
+                  const LoginScreenV1(),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                final tween = Tween<Offset>(
+                  begin: const Offset(1.0, 0.0), // from right
+                  end: Offset.zero,
+                ).chain(CurveTween(curve: Curves.easeInOut));
+                return SlideTransition(
+                  position: animation.drive(tween),
+                  child: child,
+                );
+              },
+              transitionDuration: const Duration(milliseconds: 300),
+            ),
+          );
         },
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           child: Center(
             child: Text(
-              Strings.iAmReady.toUpperCase(),
+              Strings.imReady.toUpperCase(),
               style: TextStyle(
                 fontSize: Util.getWidthValueInPixels(16),
                 fontWeight: FontWeight.w700,
@@ -55,7 +73,7 @@ class IntroScreenThirdV1 extends StatelessWidget {
           (Util.getWidthValueInPixels(175 / 2)),
       width: Util.getWidthValueInPixels(175),
       height: Util.getHeightValueInPixels(48),
-      textArray: const [Strings.sayHiToYourNew, Strings.financeTracker],
+      textArray: const [Strings.yourGoals, Strings.yourFuture],
       fontSize: 20,
       fontWeight: FontWeight.w700,
       color: Colors.white,
@@ -71,9 +89,9 @@ class IntroScreenThirdV1 extends StatelessWidget {
       width: Util.getWidthValueInPixels(285),
       height: Util.getHeightValueInPixels(60),
       textArray: const [
-        Strings.youAreAmazingForTakingThisFirstStep,
-        Strings.towardsGettingBetterControlOverYour,
-        Strings.moneyAndFinancialGoals
+        Strings.whetherItsSavingForADream,
+        Strings.clearingDebt,
+        Strings.weWillHelpYouGetThere
       ],
       fontSize: 15,
       fontWeight: FontWeight.w400,
@@ -94,7 +112,7 @@ class IntroScreenThirdV1 extends StatelessWidget {
     );
   }
 
-  Widget _introScreenButtonWidget() {
+  Widget _introScreenButtonWidget(BuildContext context) {
     return IntroScreenButton(
       bottomShift: Util.getHeightValueInPixels(136),
       leftShift: Util.getFullScreenWidth() * 0.5 -
@@ -106,7 +124,7 @@ class IntroScreenThirdV1 extends StatelessWidget {
       shadowBlurRadius: Util.getWidthValueInPixels(4),
       shadowOffset: const Offset(0, 4),
       borderRadius: Util.getWidthValueInPixels(52.5),
-      child: _getStartedCtaChildWidget(),
+      child: _getStartedCtaChildWidget(context),
     );
   }
 
@@ -149,7 +167,7 @@ class IntroScreenThirdV1 extends StatelessWidget {
             /**
              * Adding Intro Screen Button
              */
-            _introScreenButtonWidget(),
+            _introScreenButtonWidget(context),
           ],
         ),
       ),
