@@ -2,10 +2,8 @@ package com.example.expense_tracker
 
 import android.app.Activity
 import android.content.Context
-import android.os.BatteryManager
 import android.os.Handler
 import android.os.Looper
-import android.widget.Toast
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -17,6 +15,7 @@ import io.flutter.plugin.common.StringCodec
 import android.util.Log
 
 private const val TAG = "AppNativeBridge"
+private const val GOOGLE_LOGIN_ACTION = "googleLogin" // action name Flutter will call
 
 /**
  * AppNativeBridge
@@ -37,6 +36,7 @@ class AppNativeBridge : FlutterPlugin, ActivityAware,
 
     private var eventSink: EventChannel.EventSink? = null
     private val mainHandler = Handler(Looper.getMainLooper())
+
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         appContext = binding.applicationContext
@@ -61,17 +61,21 @@ class AppNativeBridge : FlutterPlugin, ActivityAware,
     // ActivityAware
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
         activity = binding.activity
+        GoogleLoginCM.attach(binding)
     }
 
     override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
         activity = binding.activity
+        GoogleLoginCM.attach(binding)
     }
 
     override fun onDetachedFromActivityForConfigChanges() {
+        GoogleLoginCM.detach()
         activity = null
     }
 
     override fun onDetachedFromActivity() {
+        GoogleLoginCM.detach()
         activity = null
     }
 
@@ -81,8 +85,24 @@ class AppNativeBridge : FlutterPlugin, ActivityAware,
      */
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         val action = call.method;
-        val msg = call.argument<String>("message") ?: "";
+        val msg = call.argument<String>("message") ?: ""
+        Log.d(TAG, "onMethodCall(): action=$action, msg=$msg")
         when (action) {
+            // Handling Google Login Action from flutter -> Native Android
+            GOOGLE_LOGIN_ACTION -> {
+                val serverClientId = call.argument<String>("serverClientId")
+                if (serverClientId.isNullOrBlank()) {
+                    Log.d("GoogleLoginCM", "signIn(): NO_WEB_CLIENT_ID")
+                    result.error(
+                        "NO_WEB_CLIENT_ID",
+                        "serverClientId (Web client ID) is required",
+                        null
+                    )
+                } else {
+                    Log.d("GoogleLoginCM", "Google Login action start on native side")
+                    GoogleLoginCM.signIn(serverClientId, result) // <-- pass it to CM flow
+                }
+            }
             "ping" -> {
                 Log.d(TAG, "ping() called from Flutter to Native android with: $msg")
                 result.success("pong-from-android: $msg")
@@ -99,17 +119,6 @@ class AppNativeBridge : FlutterPlugin, ActivityAware,
      */
     private fun sendCallBackToFlutter (functionName : String, data : Map<String, Any?>) {
         methodChannel.invokeMethod(functionName, data)
-    }
-
-    private fun handleExecute(call: MethodCall, result: MethodChannel.Result) {
-        val action = call.argument<String>("action")
-        val args = call.argument<Map<String, Any?>>("args") ?: emptyMap<String, Any?>()
-        when (action) {
-            // Register your actions here. Keep this generic and grow over time.
-            else -> {
-                result.error("UNKNOWN_ACTION", "Unknown action: $action", null)
-            }
-        }
     }
 
     // Android -> Flutter stream lifecycle

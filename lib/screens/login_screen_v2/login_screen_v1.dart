@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/utility/constants.dart';
 import '../../core/utility/strings.dart';
 import '../../core/utility/util.dart';
+import '../../services/loginServices/google_login.dart';
 import '../login_screen_v1/register_screen.dart';
 import '../introScreens/widgets/gradient_bg.dart';
 
@@ -379,8 +381,15 @@ class _LoginScreenV2State extends State<LoginScreenV2> {
     // TODO: login action
   }
 
-  void _onGoogle() {
-    // TODO: Google sign-in
+  Future<void> _onGoogle() async {
+    try {
+      // Ensure this constant exists and is correct; name it oauthClientId (not oath).
+      const String webClientId = Constants.oathClientId;
+      final user = await GoogleLogin.signIn(webClientId); // await the Future
+      debugPrint('GoogleLoginCM: Google sign-in result: $user');
+    } on PlatformException catch (e) {
+      debugPrint('GoogleLoginCM: Google sign-in error: $e');
+    }
   }
 
   void _goRegister() {

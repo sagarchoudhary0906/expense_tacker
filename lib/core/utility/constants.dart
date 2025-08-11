@@ -20,4 +20,8 @@ class Constants {
   static const String HEXFFD9CB = "ffd9cb";
   static const String HEXB684C3 = "B684C3";
   static const String HEXFFB1b1 = "FFB1B1";
+
+  // OATH CLEINT ID
+  static const String oathClientId =
+      "191436354454-lco8snsrqhj05ehte14iq7n1v3fmlfvl.apps.googleusercontent.com"; //"191436354454-0tcs24lbpj2e41r4elsclol3eo3j9ejl.apps.googleusercontent.com";
 }
