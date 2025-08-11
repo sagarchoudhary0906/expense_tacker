@@ -12,7 +12,6 @@ import 'widgets/intro_screen_dots.dart';
 import 'widgets/top_curve_shadow.dart';
 import 'widgets/intro_screen_button.dart';
 import 'widgets/second_into_texrt.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class IntroScreenFirstV1 extends StatelessWidget {
   const IntroScreenFirstV1({super.key});
@@ -24,7 +23,8 @@ class IntroScreenFirstV1 extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(30),
         onTap: () {
-          NativeBridge.makeNativeCall("ping", "Hello From Flutter for the first time");
+          NativeBridge.makeNativeCall(
+              "ping", "Hello From Flutter for the first time");
           Navigator.of(context).push(
             PageRouteBuilder(
               pageBuilder: (context, animation, secondaryAnimation) =>

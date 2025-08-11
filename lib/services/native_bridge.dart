@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart'; // for debugPrint
-import 'package:expense_tracker/services/native_bridge.dart';
 
 /// NativeBridge: Generic, bi-directional bridge between Flutter and Android.
 /// Channels:
