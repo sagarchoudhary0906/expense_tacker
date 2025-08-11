@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'core/utility/device_info.dart';
@@ -8,6 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   NativeBridge.registerNativeCallbacks(); // must be BEFORE native invokes
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -16,12 +18,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // Initialize device dimensions once at app startup
-    DeviceInfo.instance.initialize(context);
-
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: IntroScreenFirstV1(),
+      builder: (context, child) {
+        // MediaQuery is available here
+        DeviceInfo.instance.initialize(context);
+        return child!;
+      },
+      home: const IntroScreenFirstV1(),
     );
   }
 }
