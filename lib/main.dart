@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'firebase_options.dart';
 import 'core/utility/device_info.dart';
 import 'screens/introScreens/intro_screen_first_v1.dart';
+import 'services/native_bridge.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  // await Firebase.initializeApp(...);
 
+  NativeBridge.registerNativeCallbacks(); // must be BEFORE native invokes
   runApp(const MyApp());
 }
 

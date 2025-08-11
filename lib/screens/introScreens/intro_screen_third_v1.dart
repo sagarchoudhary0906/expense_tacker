@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import '../../core/utility/constants.dart';
 import '../../core/utility/strings.dart';
 import '../../core/utility/util.dart';
-import '../login_screen_v1/login_screen.dart';
+import '../../services/native_bridge.dart';
+import '../login_screen_v2/login_screen_v1.dart';
 import 'widgets/colorful_clipper.dart';
 import 'widgets/first_intro_text.dart';
 import 'widgets/gradient_bg.dart';
@@ -22,10 +23,11 @@ class IntroScreenThirdV1 extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(30),
         onTap: () {
+          NativeBridge.pingNative("Hello From Flutter for the third time");
           Navigator.of(context).push(
             PageRouteBuilder(
               pageBuilder: (context, animation, secondaryAnimation) =>
-                  const LoginScreenV1(),
+                  const LoginScreenV2(),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {
                 final tween = Tween<Offset>(
