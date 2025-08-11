@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../core/utility/constants.dart';
 import '../../core/utility/strings.dart';
 import '../../core/utility/util.dart';
-import '../../services/native_bridge.dart';
 import 'intro_screen_second_v1.dart';
 import 'widgets/colorful_clipper.dart';
 import 'widgets/first_intro_text.dart';
@@ -23,8 +22,6 @@ class IntroScreenFirstV1 extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(30),
         onTap: () {
-          NativeBridge.makeNativeCall(
-              "ping", "Hello From Flutter for the first time");
           Navigator.of(context).push(
             PageRouteBuilder(
               pageBuilder: (context, animation, secondaryAnimation) =>
