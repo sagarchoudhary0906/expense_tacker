@@ -106,6 +106,7 @@ class ServerController {
         endpoint: endpoint, method: 'POST', data: data, timeout: timeout);
   }
 
+  // Each Field of data should be in string format
   static Map<String, dynamic> getRequestPayload(
       String action, Map<String, dynamic>? data) {
     data ??= {};
