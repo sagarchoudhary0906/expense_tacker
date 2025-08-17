@@ -29,6 +29,5 @@ class Constants {
   static const String macLanIP = "192.168.0.112";
   static const String localPort = "3000";
   static const String serverUrl =
-      "https://keeps-aa-dawn-charges.trycloudflare.com";
-  //http://localhost:3000
+      "https://const-farmers-routing-civil.trycloudflare.com";
 }

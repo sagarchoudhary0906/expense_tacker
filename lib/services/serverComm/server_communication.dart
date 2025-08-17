@@ -7,6 +7,7 @@ import 'package:expense_tracker/core/utility/constants.dart';
 class ServerController {
   ServerController._();
 
+  static const String _mainController = "expense";
   static const String _base = Constants.serverUrl; // e.g., your Cloudflare URL
 
   static String _normalize(String endpoint) {
@@ -14,12 +15,6 @@ class ServerController {
     return endpoint.startsWith('/') ? endpoint : '/$endpoint';
   }
 
-  static String _truncate(String text, {int max = 1000}) {
-    if (text.length <= max) return text;
-    return '${text.substring(0, max)}...<truncated ${text.length - max} chars>';
-  }
-
-  // Only: endpoint, method, data, timeout
   static Future<dynamic> requestJson({
     required String endpoint,
     String method = 'GET',
@@ -27,12 +22,24 @@ class ServerController {
     Duration timeout = const Duration(seconds: 10),
   }) async {
     final ep = _normalize(endpoint);
-    final uri = Uri.parse('$_base$ep');
+    var uri = Uri.parse('$_base$ep');
+
+    // Server expects GET payload (if any) as urlencoded JSON in 'msg' query param.
+    if (method.toUpperCase() == 'GET' && data != null && data.isNotEmpty) {
+      uri = uri.replace(queryParameters: {
+        'msg': jsonEncode(data),
+      });
+    }
+
+    debugPrint("Sagar: uri = ${uri.toString()}");
 
     final headers = <String, String>{
       'Accept': 'application/json',
-      'Content-Type': 'application/json',
     };
+    // Only set Content-Type when we actually send a body
+    if (method.toUpperCase() != 'GET') {
+      headers['Content-Type'] = 'application/json';
+    }
     http.Response res;
     final m = method.toUpperCase();
     final sw = Stopwatch()..start();
@@ -43,19 +50,6 @@ class ServerController {
       } else if (m == 'POST') {
         res = await http
             .post(uri, headers: headers, body: jsonEncode(data ?? {}))
-            .timeout(timeout);
-      } else if (m == 'PUT') {
-        res = await http
-            .put(uri, headers: headers, body: jsonEncode(data ?? {}))
-            .timeout(timeout);
-      } else if (m == 'PATCH') {
-        res = await http
-            .patch(uri, headers: headers, body: jsonEncode(data ?? {}))
-            .timeout(timeout);
-      } else if (m == 'DELETE') {
-        res = await http
-            .delete(uri,
-                headers: headers, body: data == null ? null : jsonEncode(data))
             .timeout(timeout);
       } else {
         throw Exception('Unsupported HTTP method: $method');
@@ -100,33 +94,25 @@ class ServerController {
   }
 
   // Minimal convenience wrappers using only endpoint, data, timeout
-  static Future<dynamic> get(String endpoint,
+  static Future<dynamic> get(String endpoint, Map<String, dynamic>? data,
       {Duration timeout = const Duration(seconds: 10)}) {
-    return requestJson(endpoint: endpoint, method: 'GET', timeout: timeout);
+    return requestJson(
+        endpoint: endpoint, method: 'GET', data: data, timeout: timeout);
   }
 
-  static Future<dynamic> post(String endpoint, Map<String, dynamic> data,
+  static Future<dynamic> post(String endpoint, Map<String, dynamic>? data,
       {Duration timeout = const Duration(seconds: 10)}) {
     return requestJson(
         endpoint: endpoint, method: 'POST', data: data, timeout: timeout);
   }
 
-  static Future<dynamic> put(String endpoint, Map<String, dynamic> data,
-      {Duration timeout = const Duration(seconds: 10)}) {
-    return requestJson(
-        endpoint: endpoint, method: 'PUT', data: data, timeout: timeout);
-  }
-
-  static Future<dynamic> patch(String endpoint, Map<String, dynamic> data,
-      {Duration timeout = const Duration(seconds: 10)}) {
-    return requestJson(
-        endpoint: endpoint, method: 'PATCH', data: data, timeout: timeout);
-  }
-
-  static Future<dynamic> delete(String endpoint,
-      {Map<String, dynamic>? data,
-      Duration timeout = const Duration(seconds: 10)}) {
-    return requestJson(
-        endpoint: endpoint, method: 'DELETE', data: data, timeout: timeout);
+  static Map<String, dynamic> getRequestPayload(
+      String action, Map<String, dynamic>? data) {
+    data ??= {};
+    return {
+      'c': _mainController,
+      'a': action,
+      'd': data,
+    };
   }
 }
