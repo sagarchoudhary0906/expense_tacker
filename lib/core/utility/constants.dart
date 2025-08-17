@@ -23,5 +23,12 @@ class Constants {
 
   // OATH CLEINT ID
   static const String oathClientId =
-      "191436354454-lco8snsrqhj05ehte14iq7n1v3fmlfvl.apps.googleusercontent.com"; //"191436354454-0tcs24lbpj2e41r4elsclol3eo3j9ejl.apps.googleusercontent.com";
+      "191436354454-lco8snsrqhj05ehte14iq7n1v3fmlfvl.apps.googleusercontent.com";
+
+  // Server Realted COnstants
+  static const String macLanIP = "192.168.0.112";
+  static const String localPort = "3000";
+  static const String serverUrl =
+      "https://keeps-aa-dawn-charges.trycloudflare.com";
+  //http://localhost:3000
 }
