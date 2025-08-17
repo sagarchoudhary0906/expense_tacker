@@ -17,15 +17,15 @@ class ServerController {
 
   static Future<dynamic> requestJson({
     required String endpoint,
-    String method = 'GET',
+    required String method,
     Map<String, dynamic>? data,
     Duration timeout = const Duration(seconds: 10),
   }) async {
     final ep = _normalize(endpoint);
     var uri = Uri.parse('$_base$ep');
 
-    // Server expects GET payload (if any) as urlencoded JSON in 'msg' query param.
-    if (method.toUpperCase() == 'GET' && data != null && data.isNotEmpty) {
+    //Server expects GET payload (if any) as urlencoded JSON in 'msg' query param.
+    if (data != null && data.isNotEmpty) {
       uri = uri.replace(queryParameters: {
         'msg': jsonEncode(data),
       });

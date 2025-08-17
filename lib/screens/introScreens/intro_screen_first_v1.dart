@@ -1,3 +1,4 @@
+import 'package:expense_tracker/services/serverComm/server_communication.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/utility/constants.dart';
@@ -21,26 +22,37 @@ class IntroScreenFirstV1 extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         borderRadius: BorderRadius.circular(30),
-        onTap: () {
-          Navigator.of(context).push(
-            PageRouteBuilder(
-              pageBuilder: (context, animation, secondaryAnimation) =>
-                  const IntroScreenSecondV1(),
-              transitionsBuilder:
-                  (context, animation, secondaryAnimation, child) {
-                final tween = Tween<Offset>(
-                  begin: const Offset(1.0, 0.0), // start offscreen right
-                  end: Offset.zero, // end at center
-                ).chain(CurveTween(curve: Curves.easeInOut));
+        onTap: () async {
+          var res = ServerController.post(
+              'expense',
+              ServerController.getRequestPayload('create', {
+                'name': 'Sagar',
+                'amount': '100',
+                'date': '2021-01-01',
+                'category': 'Food',
+                'description': 'This is a test expense',
+              }));
 
-                return SlideTransition(
-                  position: animation.drive(tween),
-                  child: child,
-                );
-              },
-              transitionDuration: const Duration(milliseconds: 300),
-            ),
-          );
+          debugPrint("Sagar: res = ${res.toString()}");
+          // Navigator.of(context).push(
+          //   PageRouteBuilder(
+          //     pageBuilder: (context, animation, secondaryAnimation) =>
+          //         const IntroScreenSecondV1(),
+          //     transitionsBuilder:
+          //         (context, animation, secondaryAnimation, child) {
+          //       final tween = Tween<Offset>(
+          //         begin: const Offset(1.0, 0.0), // start offscreen right
+          //         end: Offset.zero, // end at center
+          //       ).chain(CurveTween(curve: Curves.easeInOut));
+
+          //       return SlideTransition(
+          //         position: animation.drive(tween),
+          //         child: child,
+          //       );
+          //     },
+          //     transitionDuration: const Duration(milliseconds: 300),
+          //   ),
+          // );
         },
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
