@@ -2,14 +2,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'core/app_lifecycle.dart';
+import 'core/expense_app/expense_app.dart';
 import 'core/utility/device_info.dart';
 import 'localDataStorage/jsonStore.dart';
-import 'screens/introScreens/intro_screen_first_v1.dart';
 import 'services/native_bridge.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   NativeBridge.registerNativeCallbacks(); // must be BEFORE native invokes
   await Firebase.initializeApp();
   await JsonStore.init(); // creates db.json if missing
@@ -22,6 +21,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    var initialRoute = ExpenseApp.getInitialRoute();
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       builder: (context, child) {
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         DeviceInfo.instance.initialize(context);
         return child!;
       },
-      home: const IntroScreenFirstV1(),
+      home: initialRoute,
     );
   }
 }
