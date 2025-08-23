@@ -1,5 +1,5 @@
+import 'package:expense_tracker/core/appData/expense_data.dart';
 import 'package:flutter/widgets.dart';
-import 'package:expense_tracker/localDataStorage/jsonStore.dart';
 
 typedef LifecycleAsyncCallback = Future<void> Function();
 
@@ -20,19 +20,10 @@ class AppLifecycle {
     _listener = AppLifecycleListener(
       onResume: () async {},
       onInactive: () async {
-        final db = await JsonStore.readDb();
-        final data = Map<String, dynamic>.from(db['data'] as Map? ?? {});
-        db['data'] = data;
-        await JsonStore.saveDb(db);
+        ExpenseData.saveData();
       },
-      onPause: () async {
-        final db = await JsonStore.readDb();
-        final data = Map<String, dynamic>.from(db['data'] as Map? ?? {});
-        db['data'] = data;
-        await JsonStore.saveDb(db);
-      },
-      onDetach: () async {
-      },
+      onPause: () async {},
+      onDetach: () async {},
     );
   }
 
@@ -43,8 +34,7 @@ class AppLifecycle {
 
   static void handleAppLifecycle() {
     attach(
-      onPause: () async {
-      },
+      onPause: () async {},
       onDetach: () async {},
     );
   }

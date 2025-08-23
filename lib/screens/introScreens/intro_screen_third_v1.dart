@@ -2,6 +2,7 @@ import 'package:expense_tracker/screens/introScreens/widgets/intro_screen_button
 import 'package:expense_tracker/screens/introScreens/widgets/second_into_texrt.dart';
 import 'package:flutter/material.dart';
 
+import '../../core/appData/expense_data.dart';
 import '../../core/utility/constants.dart';
 import '../../core/utility/strings.dart';
 import '../../core/utility/util.dart';
@@ -22,6 +23,7 @@ class IntroScreenThirdV1 extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(30),
         onTap: () {
+          ExpenseData.setIsIntroDone(true);
           Navigator.of(context).push(
             PageRouteBuilder(
               pageBuilder: (context, animation, secondaryAnimation) =>
