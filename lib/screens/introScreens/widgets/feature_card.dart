@@ -46,13 +46,13 @@ class FeatureCard extends StatelessWidget {
                 Text(title,
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: Util.getHeightValueInPixels(14),
+                        fontSize: Util.getHeightValueInPixels(16),
                         fontWeight: FontWeight.w600)),
                 SizedBox(height: Util.getHeightValueInPixels(4)),
                 Text(description,
                     style: TextStyle(
                         color: Colors.white.withOpacity(0.8),
-                        fontSize: Util.getHeightValueInPixels(12),
+                        fontSize: Util.getHeightValueInPixels(14),
                         fontWeight: FontWeight.w400,
                         height: 1.5)),
               ],

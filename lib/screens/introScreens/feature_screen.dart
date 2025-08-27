@@ -1,3 +1,4 @@
+import 'package:expense_tracker/screens/introScreens/get_started_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../animations/pulse_scale_anim.dart';
@@ -22,23 +23,23 @@ class FeaturesScreen extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            Util.getColorForHex(Constants.HEXFF3B82F6),
-            Util.getColorForHex(Constants.HEXFF2563EB),
+            Util.getColorForHex(Constants.HEXFF1D4ED8),
             Util.getColorForHex(Constants.HEXFF7C3AED),
+            Util.getColorForHex(Constants.HEXFF6B21A8),
           ],
         ),
       ),
-      child: _getBody(),
+      child: _getBody(context),
     ));
   }
 
-  Widget _getBody() {
+  Widget _getBody(BuildContext context) {
     return Stack(
       children: [
         // Backgroud pattern
         _getBgPattern(),
         // Feature Screen Image
-        _getContent(),
+        _getContent(context),
       ],
     );
   }
@@ -79,7 +80,7 @@ class FeaturesScreen extends StatelessWidget {
     );
   }
 
-  Widget _getContent() {
+  Widget _getContent(BuildContext context) {
     return SafeArea(
       child: Padding(
         padding:
@@ -102,14 +103,15 @@ class FeaturesScreen extends StatelessWidget {
 
             // Features List
             _getFeaturesList(),
-            SizedBox(height: Util.getHeightValueInPixels(50)),
+            SizedBox(height: Util.getHeightValueInPixels(32)),
 
             // Continue Button
-            _getContinueButton(),
+            _getContinueButton(context),
 
             const Spacer(),
 
             const PageIndicators(currentPage: currentPageIndex, totalPages: 3),
+            SizedBox(height: Util.getHeightValueInPixels(10)),
           ],
         ),
       ),
@@ -144,7 +146,7 @@ class FeaturesScreen extends StatelessWidget {
     return Text(
       Strings.feature_screen_headline,
       style: TextStyle(
-        fontSize: Util.getHeightValueInPixels(18.0),
+        fontSize: Util.getHeightValueInPixels(20.0),
         fontWeight: FontWeight.bold,
         color: Colors.white,
         height: 1.3,
@@ -157,7 +159,7 @@ class FeaturesScreen extends StatelessWidget {
     return Text(
       Strings.feature_screen_description,
       style: TextStyle(
-        fontSize: Util.getHeightValueInPixels(13.0),
+        fontSize: Util.getHeightValueInPixels(16.0),
         fontWeight: FontWeight.w400,
         color: Colors.white,
         height: 1.5,
@@ -190,13 +192,28 @@ class FeaturesScreen extends StatelessWidget {
     );
   }
 
-  Widget _getContinueButton() {
+  Widget _getContinueButton(BuildContext context) {
     Widget buttonWidget = SizedBox(
       width: Util.getWidthValueInPixels(288),
       height: Util.getHeightValueInPixels(56),
       child: ElevatedButton(
         onPressed: () {
-          debugPrint("Get Started Button Pressed");
+          Navigator.of(context).push(
+            PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) =>
+                  const GetStartedScreen(),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                final curve =
+                    CurvedAnimation(parent: animation, curve: Curves.easeInOut);
+                return FadeTransition(
+                  opacity: Tween<double>(begin: 0.0, end: 1.0).animate(curve),
+                  child: child,
+                );
+              },
+              transitionDuration: const Duration(milliseconds: 300),
+            ),
+          );
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,

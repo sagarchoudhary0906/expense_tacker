@@ -77,6 +77,7 @@ class IntroScreenV1 extends StatelessWidget {
             _getGetStartedButton(context),
             const Spacer(),
             const PageIndicators(currentPage: currentPageIndex, totalPages: 3),
+            SizedBox(height: Util.getHeightValueInPixels(10)),
           ],
         ),
       ),
