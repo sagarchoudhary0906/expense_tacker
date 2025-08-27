@@ -217,7 +217,7 @@ class FeaturesScreen extends StatelessWidget {
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,
-          foregroundColor: Util.getColorForHex(Constants.HEXFF2563EB),
+          foregroundColor: Util.getColorForHex(Constants.HEXFF7C3AED),
           shape: RoundedRectangleBorder(
             borderRadius:
                 BorderRadius.circular(Util.getHeightValueInPixels(16)),

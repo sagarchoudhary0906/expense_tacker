@@ -81,4 +81,11 @@ class Strings {
   static const String feature_screen_third_feature_description =
       "Visualize spending patterns and discover opportunities to save money";
   static const String continue_text = "Continue";
+
+  static const String get_started_screen_title =
+      "Ready to Trasnform Your Financial Future?";
+  static const String get_started_screen_description =
+      "Join thousands of users who have taken control of their finances with our smart expense tracking and budgeting app.";
+  static const String get_started_screen_terms_and_privacy_policy =
+      "By continuing, you agree to our Terms of Service and Privacy Policy";
 }

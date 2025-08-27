@@ -5,6 +5,7 @@ class Constants {
   static const String googleLogoIcon = 'assets/images/google_logo.png';
   static const String bgImage = 'assets/images/bg_image.jpeg';
   static const String featureScreenImage = 'assets/images/feature_screen_image.jpeg';
+  static const String getStartedScreenImage = 'assets/images/get_started_screen.jpeg';
 
   // Font Size consts
   static const HEADLINE_1_SIZE = 36.0;
