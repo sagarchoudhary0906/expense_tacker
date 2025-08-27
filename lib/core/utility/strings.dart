@@ -65,4 +65,20 @@ class Strings {
   static const String smart_tracking = "Smart Tracking";
   static const String budget_goals = "Budget Goals";
   static const String analytics = "Analytics";
+  static const String feature_screen_headline =
+      "Smart Features for Better Money Management";
+  static const String feature_screen_description =
+      "Discover powerful tools designed to help you track, budget, and optimize your spending habits.";
+  static const String feature_screen_first_feature_title =
+      "Auto Expenese Tracking";
+  static const String feature_screen_first_feature_description =
+      "Automatically categorize and track your expenses with AI-powered recognition";
+  static const String feature_screen_second_feature_title = "Smart Budgeting";
+  static const String feature_screen_second_feature_description =
+      "Set personalised budgets and get real-time alerts when you're close to limits";
+  static const String feature_screen_third_feature_title =
+      "Insightful Analytics";
+  static const String feature_screen_third_feature_description =
+      "Visualize spending patterns and discover opportunities to save money";
+  static const String continue_text = "Continue";
 }

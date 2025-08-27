@@ -5,6 +5,7 @@ import '../../core/utility/constants.dart';
 import '../../core/utility/strings.dart';
 import '../../core/utility/util.dart';
 import '../introScreens/widgets/feature_pills.dart';
+import 'feature_screen.dart';
 import 'widgets/page_indicators.dart';
 
 class IntroScreenV1 extends StatelessWidget {
@@ -31,7 +32,7 @@ class IntroScreenV1 extends StatelessWidget {
         child: Stack(
           children: [
             _getBackgroundImage(),
-            _getMainBodyWidgets(),
+            _getMainBodyWidgets(context),
           ],
         ),
       ),
@@ -50,7 +51,7 @@ class IntroScreenV1 extends StatelessWidget {
     ));
   }
 
-  Widget _getMainBodyWidgets() {
+  Widget _getMainBodyWidgets(BuildContext context) {
     Widget mainBodyWidgets;
     mainBodyWidgets = SafeArea(
       child: Padding(
@@ -71,9 +72,9 @@ class IntroScreenV1 extends StatelessWidget {
             SizedBox(height: Util.getHeightValueInPixels(48)),
             //Feature Pills
             _getFeaturePills(),
-            SizedBox(height: Util.getHeightValueInPixels(64)),
+            SizedBox(height: Util.getHeightValueInPixels(100)),
             // Get Started Button
-            _getGetStartedButton(),
+            _getGetStartedButton(context),
             const Spacer(),
             const PageIndicators(currentPage: currentPageIndex, totalPages: 3),
           ],
@@ -172,13 +173,28 @@ class IntroScreenV1 extends StatelessWidget {
     );
   }
 
-  Widget _getGetStartedButton() {
+  Widget _getGetStartedButton(BuildContext context) {
     Widget buttonWidget = SizedBox(
       width: Util.getWidthValueInPixels(288),
       height: Util.getHeightValueInPixels(56),
       child: ElevatedButton(
         onPressed: () {
-          debugPrint("Get Started Button Pressed");
+          Navigator.of(context).push(
+            PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) =>
+                  const FeaturesScreen(),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                final curve =
+                    CurvedAnimation(parent: animation, curve: Curves.easeInOut);
+                return FadeTransition(
+                  opacity: Tween<double>(begin: 0.0, end: 1.0).animate(curve),
+                  child: child,
+                );
+              },
+              transitionDuration: const Duration(milliseconds: 300),
+            ),
+          );
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,
