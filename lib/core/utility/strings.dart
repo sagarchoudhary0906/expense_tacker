@@ -60,4 +60,6 @@ class Strings {
   static const String weWillHelpYouGetThere = "we’ll help you get there.";
   static const String imReady = "I'm ready";
   static const String showMeHow = "Show me how";
+  static const String first_intro_scren_tagline =
+      "Take control of your finances with samrt expense tracking and budgeting";
 }
