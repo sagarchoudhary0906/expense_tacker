@@ -5,9 +5,11 @@ import '../../core/utility/constants.dart';
 import '../../core/utility/strings.dart';
 import '../../core/utility/util.dart';
 import '../introScreens/widgets/feature_pills.dart';
+import 'widgets/page_indicators.dart';
 
 class IntroScreenV1 extends StatelessWidget {
   const IntroScreenV1({super.key});
+  static const int currentPageIndex = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +75,7 @@ class IntroScreenV1 extends StatelessWidget {
             // Get Started Button
             _getGetStartedButton(),
             const Spacer(),
+            const PageIndicators(currentPage: currentPageIndex, totalPages: 3),
           ],
         ),
       ),
@@ -145,21 +148,21 @@ class IntroScreenV1 extends StatelessWidget {
       alignment: WrapAlignment.center,
       children: const [
         FeaturePill(
-            text: "Smart Tracking",
+            text: Strings.smart_tracking,
             horizontalPadding: 16,
             verticalPadding: 8,
             borderRadius: 20,
             textFontSize: 14,
             textFontWeight: FontWeight.w500),
         FeaturePill(
-            text: "Budget Goals",
+            text: Strings.budget_goals,
             horizontalPadding: 16,
             verticalPadding: 8,
             borderRadius: 20,
             textFontSize: 14,
             textFontWeight: FontWeight.w500),
         FeaturePill(
-            text: "Analytics",
+            text: Strings.analytics,
             horizontalPadding: 16,
             verticalPadding: 8,
             borderRadius: 20,

@@ -62,4 +62,7 @@ class Strings {
   static const String showMeHow = "Show me how";
   static const String first_intro_scren_tagline =
       "Take control of your finances with samrt expense tracking and budgeting";
+  static const String smart_tracking = "Smart Tracking";
+  static const String budget_goals = "Budget Goals";
+  static const String analytics = "Analytics";
 }
