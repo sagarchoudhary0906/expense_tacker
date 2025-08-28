@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/utility/constants.dart';
 import '../../../core/utility/util.dart';
 
 class PageIndicators extends StatelessWidget {

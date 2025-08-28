@@ -88,4 +88,10 @@ class Strings {
       "Join thousands of users who have taken control of their finances with our smart expense tracking and budgeting app.";
   static const String get_started_screen_terms_and_privacy_policy =
       "By continuing, you agree to our Terms of Service and Privacy Policy";
+
+  //Home Screen Strings
+  static const String home = "Home";
+  static const String add = "Add";
+  static const String profile = "Profile";
+  static const String settings = "Settings";
 }
