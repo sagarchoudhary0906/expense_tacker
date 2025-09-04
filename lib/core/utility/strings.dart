@@ -94,4 +94,13 @@ class Strings {
   static const String add = "Add";
   static const String profile = "Profile";
   static const String settings = "Settings";
+  static const String goodMorning = "Good Morning";
+  static const String goodAfternoon = "Good Afternoon";
+  static const String goodEvening = "Good Evening";
+  static const String exclamationMark = "!";
+  static const String currentBalance = "Current Balance";
+  static const String hiddenBalance = "••••••";
+  static const String thisMonth = "This month";
+  static const String percentage = "%";
+  static const String saved = "saved";
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../core/utility/constants.dart';
-import '../../core/utility/strings.dart';
-import '../../core/utility/util.dart';
+import '../core/utility/constants.dart';
+import '../core/utility/strings.dart';
+import '../core/utility/util.dart';
+import 'dashboard_screen/dashboard_screen.dart';
 
 class MainHomeScreen extends StatefulWidget {
   const MainHomeScreen({super.key});
@@ -36,12 +37,16 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> screens = [
+      const DashboardScreen(),
+    ];
+
     return Scaffold(
-      body: _getBody(context),
+      body: _getBody(context, screens),
     );
   }
 
-  Widget _getBody(BuildContext context) {
+  Widget _getBody(BuildContext context, List<Widget> screens) {
     return Container(
       width: Util.getFullScreenWidth(),
       height: Util.getFullScreenHeight(),
@@ -61,6 +66,10 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
           borderRadius: BorderRadius.circular(Util.getWidthValueInPixels(32)),
           child: Column(
             children: [
+              SizedBox(
+                width: Util.getFullScreenWidth(),
+                height: Util.getTopSafeAreaHeight(),
+              ),
               // Content Area
               Expanded(
                 child: PageView(
@@ -68,7 +77,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
                   onPageChanged: (index) {
                     _selectedIndex.value = index;
                   },
-                  children: [Container()],
+                  children: screens,
                 ),
               ),
               // Bottom Navigation

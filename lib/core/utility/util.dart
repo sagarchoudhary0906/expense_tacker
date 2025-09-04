@@ -1,6 +1,8 @@
 import 'package:expense_tracker/core/utility/device_info.dart';
 import 'package:flutter/material.dart';
 
+import 'strings.dart';
+
 class Util {
   static const double _referenceScreenHeight = 926.0;
   static const double _referenceScreenWidth = 428.0;
@@ -8,7 +10,7 @@ class Util {
   static Color getColorForHex(String hexColor) {
     hexColor = hexColor.replaceAll('#', '');
     if (hexColor.length == 6) {
-      hexColor =  'FF$hexColor';
+      hexColor = 'FF$hexColor';
     }
     return Color(int.parse(hexColor, radix: 16));
   }
@@ -68,5 +70,26 @@ class Util {
     final double screenWidth = DeviceInfo.instance.screenWidth;
 
     return (fixedPixels / _referenceScreenWidth) * screenWidth;
+  }
+
+  static int getCurrentTimestampSeconds() {
+    return DateTime.now().millisecondsSinceEpoch ~/ 1000;
+  }
+
+  static String getGreetingText() {
+    final int hour = DateTime.now().hour;
+    if (hour < 12) {
+      return Strings.goodMorning + Strings.exclamationMark;
+    } else if (hour < 17) {
+      return Strings.goodAfternoon + Strings.exclamationMark;
+    } else {
+      return Strings.goodEvening + Strings.exclamationMark;
+    }
+  }
+
+  static String formatNameShort(String name, {int maxChars = 16}) {
+    final sanitized = name.trim();
+    if (sanitized.length <= maxChars) return sanitized;
+    return '${sanitized.substring(0, maxChars).trimRight()}...';
   }
 }

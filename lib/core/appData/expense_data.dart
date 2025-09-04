@@ -21,4 +21,12 @@ class ExpenseData {
   static void setIsIntroDone(bool value) {
     isIntroDone = value;
   }
+
+  static String getCurrentBalance() {
+    return "₹ 284569.50";
+  }
+
+  static double getThisMonthSavings() {
+    return 45677.50;
+  }
 }
