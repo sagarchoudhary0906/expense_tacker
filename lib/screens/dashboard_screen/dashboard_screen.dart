@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../core/utility/profile_data.dart';
 import 'widgets/balance_card_widget.dart';
 import 'widgets/header_widget.dart';
+import 'widgets/stats_widget.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -47,6 +48,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
           // Balance Card Widget
           BalanceCardWidget(),
           SizedBox(height: Util.getWidthValueInPixels(24)),
+          // Stats Widget
+          const StatsWidget(),
         ],
       ),
     );

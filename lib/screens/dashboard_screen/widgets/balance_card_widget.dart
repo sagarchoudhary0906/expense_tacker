@@ -87,7 +87,7 @@ class _BalanceCardWidgetState extends State<BalanceCardWidget> {
           // Balance Text
           Text(
             widget.showBalance
-                ? ExpenseData.getCurrentBalance()
+                ? "${Strings.indian_rupee} ${ExpenseData.getCurrentBalance().toStringAsFixed(0)}"
                 : Strings.hiddenBalance,
             style: TextStyle(
               fontSize: Util.getWidthValueInPixels(32),
@@ -103,7 +103,7 @@ class _BalanceCardWidgetState extends State<BalanceCardWidget> {
               Icon(
                 Icons.calendar_today,
                 color: Colors.white.withOpacity(0.9),
-                size: 14,
+                size: Util.getWidthValueInPixels(14),
               ),
               SizedBox(width: Util.getWidthValueInPixels(4)),
               Text(

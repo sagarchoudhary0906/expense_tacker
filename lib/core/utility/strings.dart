@@ -103,4 +103,8 @@ class Strings {
   static const String thisMonth = "This month";
   static const String percentage = "%";
   static const String saved = "saved";
+  static const String income = "Income";
+  static const String expenses = "Expenses";
+  static const String net = "Net";
+  static const String indian_rupee = "₹";
 }
