@@ -34,7 +34,7 @@ class _SpendingOverviewWidgetState extends State<SpendingOverviewWidget>
       vsync: this,
       duration: const Duration(milliseconds: 1200),
     );
-    _reveal = CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic);
+    _reveal = CurvedAnimation(parent: _controller, curve: Curves.easeInOutSine);
     _controller.forward();
   }
 
