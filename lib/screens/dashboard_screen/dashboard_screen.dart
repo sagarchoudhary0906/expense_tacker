@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import '../../core/utility/profile_data.dart';
 import 'widgets/balance_card_widget.dart';
 import 'widgets/header_widget.dart';
+import 'widgets/recent_transaction.dart';
+import 'widgets/spending_overview.dart';
 import 'widgets/stats_widget.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -50,6 +52,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
           SizedBox(height: Util.getWidthValueInPixels(24)),
           // Stats Widget
           const StatsWidget(),
+          SizedBox(height: Util.getWidthValueInPixels(24)),
+          // Spedning Overview Widget
+          SpendingOverviewWidget(),
+          SizedBox(height: Util.getWidthValueInPixels(24)),
+          // RecentTransactions Widget
+          const RecentTransactionsWidget(),
+          SizedBox(height: Util.getWidthValueInPixels(24)),
         ],
       ),
     );
